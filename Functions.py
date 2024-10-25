@@ -2,7 +2,7 @@ from collections import namedtuple
 from pyvirtualdisplay import Display
 from thefuzz import fuzz
 
-Game = namedtuple('Game', ['site', 'home', 'away', 'fixture', gg1', 'ng1', 'gg2', 'ng2'])
+Game = namedtuple('Game', ['site', 'home', 'away', 'fixture', 'gg1', 'ng1', 'gg2', 'ng2'])
 
 def display_on():
     display = Display(visible=False, size=(1920, 1080))
