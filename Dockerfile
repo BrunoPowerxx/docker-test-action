@@ -9,4 +9,4 @@ RUN playwright install --with-deps
 
 COPY . .
 
-CMD ["pytest", "test_main.py"]
+CMD ["pytest", "-v", "test_main.py"]
