@@ -3,7 +3,6 @@ class Holly:
     hwb_url = "https://new.hollywoodbets.net/"
     close = "button[aria-label='Close modal'].CloseButton-sc-1l01k7y-0"
     prematch = "//button/span[contains(text(), 'Upcoming Soccer')]"
-    eventId = "(//span/span/button/span)")"
     btts1_yes = "((//div[contains(text(), '1st Half - Both Teams to score')]/parent::div)/following-sibling::div)/div/span[contains(text(), 'YES')]"
     btts1_no = "((//div[contains(text(), '1st Half - Both Teams to score')]/parent::div)/following-sibling::div)/div/span[contains(text(), 'NO')]"
     yes_value1 = "(((//div[contains(text(), '1st Half - Both Teams to score')]/parent::div)/following-sibling::div)/div/span[contains(text(), 'YES')])/following-sibling::span"
