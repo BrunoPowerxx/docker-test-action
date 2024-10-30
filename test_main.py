@@ -20,16 +20,15 @@ def test_supaholly():
       holly = context.new_page()
 
       goto_sb(supa)
-      get_sb(supa)
-
       goto_hwb(holly)
-      get_hwb(holly)
+      hbgames = get_hwb(holly)
+      sbgames = get_sb(supa)
       
-      arbs()
+      arbs(hbgames, sbgames)
       
       #print_hbgames()
       #print_sbgames()
 
       browser.close()
 
-    display_off()
+    display_off(display)
