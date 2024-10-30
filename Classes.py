@@ -8,7 +8,7 @@ class Holly:
     yes_value1 = "(((//div[contains(text(), '1st Half - Both Teams to score')]/parent::div)/following-sibling::div)/div/span[contains(text(), 'YES')])/following-sibling::span"
     no_value1 = "(((//div[contains(text(), '1st Half - Both Teams to score')]/parent::div)/following-sibling::div)/div/span[contains(text(), 'NO')])/following-sibling::span"
 
-    btts2es = "((//div[contains(text(), '2nd Half - Both Teams to score')]/parent::div)/following-sibling::div)/div/span[contains(text(), 'YES')]"
+    btts2_yes = "((//div[contains(text(), '2nd Half - Both Teams to score')]/parent::div)/following-sibling::div)/div/span[contains(text(), 'YES')]"
     btts2_no = "((//div[contains(text(), '2nd Half - Both Teams to score')]/parent::div)/following-sibling::div)/div/span[contains(text(), 'NO')]"
     yes_value2 = "(((//div[contains(text(), '2nd Half - Both Teams to score')]/parent::div)/following-sibling::div)/div/span[contains(text(), 'YES')])/following-sibling::span"
     no_value2 = "(((//div[contains(text(), '2nd Half - Both Teams to score')]/parent::div)/following-sibling::div)/div/span[contains(text(), 'NO')])/following-sibling::span"
