@@ -7,15 +7,16 @@ Game = namedtuple('Game', ['site', 'home', 'away', 'fixture', 'gg1', 'ng1', 'gg2
 def display_on():
     display = Display(visible=False, size=(1920, 1080))
     display.start()
+    return display
 
-def display_off():
+def display_off(display):
     display.stop()
 
 def goto_hwb(holly):
-        holly.goto()
+        holly.goto(Holly.url)
         holly.wait_for_load_state('load')
         try:
-            close_button = holly.locator(close)
+            close_button = holly.locator(Holly.close)
             if close_button.is_visible():
                 close_button.click()
                 print("Popup closed.")
@@ -65,7 +66,7 @@ def get_hwb(holly):
           holly.wait_for_load_state('load')
         return hbgames
 
-def print_hbgames():
+def print_hbgames(hbgames):
         for hbgame in hbgames:
           print(hbgame)
           print("")
@@ -111,7 +112,7 @@ def get_sb(supa):
         return sbgames
 
 
-def print_sbgames():
+def print_sbgames(sbgames):
         for sbgame in sbgames:
           print(sbgame)
           print("")
@@ -121,7 +122,8 @@ def print_sbgames():
 Arb1 = namedtuple('Arb1', ['sites', 'home', 'away', 'event', 'gg1', 'ng1', 'tip'])
 Arb2 = namedtuple('Arb2', ['sites', 'home', 'away', 'event', 'gg2', 'ng2', 'tip'])
                               
-def arbs():
+def arbs(hbgames, sbgames):
+    h1all, h2all = [], []
     #sb, pb, bu, bw, hb = games_list()
     for a in sbgames:
         for b in hbgames: 
@@ -131,16 +133,16 @@ def arbs():
                     
                 h1a = Arb1(a.site + " v " + b.site, a.home, b.away, a.fixture, a.gg1, b.ng1, (((1/a.gg1) + (1/b.ng1)) * 100))
                 
-                h1b = Arb1(a.site + " v " + b.site, a.home, b.away, a.fixture, b.gg1, a.ng1, (((1/b.gg1) + (1/a.ng1)) * 100)))
-                h2a = Arb2(a.site + " v " + b.site, a.home, b.away, a.fixture, a.gg2, b.ng2, (((1/a.gg2) + (1/b.ng2)) * 100)))
-                h2b = Arb2(a.site + " v " + b.site, a.home, b.away, a.fixture, b.gg2, a.ng2, (((1/b.gg2) + (1/a.ng2) * 100)))
+                h1b = Arb1(b.site + " v " + a.site, a.home, b.away, a.fixture, b.gg1, a.ng1, (((1/b.gg1) + (1/a.ng1)) * 100))
+                h2a = Arb2(a.site + " v " + b.site, a.home, b.away, a.fixture, a.gg2, b.ng2, (((1/a.gg2) + (1/b.ng2)) * 100))
+                h2b = Arb2(b.site + " v " + a.site, a.home, b.away, a.fixture, b.gg2, a.ng2, (((1/b.gg2) + (1/a.ng2)) * 100))
                 
                 # write this shit into a file
                 # so you don't have to be
                 # frustrated by any bs
                 
-                h1all = []
-                h2all = []
+                #h1all = []
+                #h2all = []
                 
                 h1 = [h1a, h1b]
                 h2 = [h2a, h2b]
