@@ -8,3 +8,4 @@ RUN pip install -r requirements.txt
 RUN playwright install --with-deps
 
 COPY . .
+CMD ["pytest","test_main.py"]
