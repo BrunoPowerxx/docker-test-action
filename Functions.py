@@ -160,5 +160,34 @@ def arbs(hbgames, sbgames):
                     
     return h1all, h2all
 
+from Functions import save_arbs_to_file
+
+import pandas as pd
+
+# Ensure Game, Arb1, Arb2 namedtuples are imported or defined
+
+def save_arbs(h1all, h2all, file_path="arb_data.csv"):
+    """
+    Convert lists of Arb1 and Arb2 namedtuples to DataFrames and save to a file.
+    
+    Args:
+        h1all (list): List of Arb1 namedtuples.
+        h2all (list): List of Arb2 namedtuples.
+        file_path (str): Path to save the file. Default is 'arb_data.csv'.
+    """
+    # Convert h1all and h2all to DataFrames
+    h1_df = pd.DataFrame(h1all)
+    h2_df = pd.DataFrame(h2all)
+    
+    # Save to file, appending both DataFrames
+    with open(file_path, 'w') as f:
+        f.write("Arbitrage Opportunities - 1st Half\n")
+        h1_df.to_csv(f, index=False)
+        
+        f.write("\nArbitrage Opportunities - 2nd Half\n")
+        h2_df.to_csv(f, index=False)
+    
+    print(f"Data saved to {file_path}")
+
 if __name__ == '__main__':
     print("functions created")
