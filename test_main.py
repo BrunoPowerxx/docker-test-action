@@ -1,8 +1,8 @@
 from playwright.sync_api import sync_playwright
 from pyvirtualdisplay import Display
 from collections import namedtuple
-from Functions import *
-from Classes import *
+from phunctions import *
+from klasses import *
 import pandas as pd
 import pytest
 import time
