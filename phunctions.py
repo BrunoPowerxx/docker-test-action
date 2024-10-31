@@ -1,7 +1,7 @@
 from collections import namedtuple
 from pyvirtualdisplay import Display
 from thefuzz import fuzz
-from Classes import *
+from klasses import *
 import pandas as pd
 
 Game = namedtuple('Game', ['site', 'home', 'away', 'fixture', 'gg1', 'ng1', 'gg2', 'ng2'])
