@@ -1,1 +1,33 @@
-# don't forget to add artefact logic
+name: Pull and Run Docker Image
+
+on: [workflow_dispatch]
+
+jobs:
+  pull_and_run:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Docker Login
+      run: |
+        echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
+
+    - name: Pull Docker Image
+      run: |
+        docker pull "${{ secrets.DOCKER_USER }}/test-app"
+
+    - name: Run Docker Container
+      run: |
+        docker run --name test-app-container "${{ secrets.DOCKER_USER }}/test-app"
+
+    - name: Copy arb_data.csv
+      run: |
+        docker cp test-app-container:/app/arb_data.csv ./arb_data.csv
+
+    - name: Save output as an artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: arb_data
+        path: arb_data.csv
+
+    - name: Clean up
+      run: |
+        docker rm test-app-container
