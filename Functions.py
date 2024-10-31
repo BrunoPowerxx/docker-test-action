@@ -1,6 +1,7 @@
 from collections import namedtuple
 from pyvirtualdisplay import Display
 from thefuzz import fuzz
+import pandas as pd
 
 Game = namedtuple('Game', ['site', 'home', 'away', 'fixture', 'gg1', 'ng1', 'gg2', 'ng2'])
 
@@ -159,10 +160,6 @@ def arbs(hbgames, sbgames):
                 # sort h1all and h2all by tip
                     
     return h1all, h2all
-
-from Functions import save_arbs_to_file
-
-import pandas as pd
 
 # Ensure Game, Arb1, Arb2 namedtuples are imported or defined
 
