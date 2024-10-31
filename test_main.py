@@ -3,6 +3,7 @@ from pyvirtualdisplay import Display
 from collections import namedtuple
 from Functions import *
 from Classes import *
+import pandas as pd
 import pytest
 import time
 
@@ -23,11 +24,9 @@ def test_supaholly():
       goto_hwb(holly)
       hbgames = get_hwb(holly)
       sbgames = get_sb(supa)
-      
-      arbs(hbgames, sbgames)
-      
-      #print_hbgames()
-      #print_sbgames()
+      h1all, h2all = arbs(hbgames, sbgames)
+      save_arbs(h1all, h2all)
+
 
       browser.close()
 
