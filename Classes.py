@@ -1,6 +1,6 @@
 class Holly:
     site = "Hollywoodbets"
-    hwb_url = "https://new.hollywoodbets.net/"
+    url = "https://new.hollywoodbets.net/"
     close = "button[aria-label='Close modal'].CloseButton-sc-1l01k7y-0"
     prematch = "//button/span[contains(text(), 'Upcoming Soccer')]"
     btts1_yes = "((//div[contains(text(), '1st Half - Both Teams to score')]/parent::div)/following-sibling::div)/div/span[contains(text(), 'YES')]"
