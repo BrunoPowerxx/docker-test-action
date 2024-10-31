@@ -32,7 +32,8 @@ def goto_sb(supa):
 
 def get_hwb(holly):
         holly.wait_for_load_state('load')
-        holly.wait_for_selector("(//span/span/button/span)[1]")
+        time.sleep(3)
+        #holly.wait_for_selector("(//span/span/button/span)[1]")
         all_events = holly.query_selector_all("(//span/span/button/span)")
         events = all_events[:10]
         hbgames = []
