@@ -3,6 +3,7 @@ from pyvirtualdisplay import Display
 from thefuzz import fuzz
 from klasses import *
 import pandas as pd
+import time
 
 Game = namedtuple('Game', ['site', 'home', 'away', 'fixture', 'gg1', 'ng1', 'gg2', 'ng2'])
 
@@ -32,7 +33,7 @@ def goto_sb(supa):
 
 def get_hwb(holly):
         holly.wait_for_load_state('load')
-        time.sleep(3)
+        time.sleep(5)
         #holly.wait_for_selector("(//span/span/button/span)[1]")
         all_events = holly.query_selector_all("(//span/span/button/span)")
         events = all_events[:10]
