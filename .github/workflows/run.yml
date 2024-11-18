@@ -17,16 +17,16 @@ jobs:
     - name: Run Docker Container
       run: |
         docker run --name test-app-container "${{ secrets.DOCKER_USER }}/test-app"
-
-    - name: Copy arb_data.csv
+    - name: Copy screenshots from container
       run: |
-        docker cp test-app-container:/app/arb_data.csv ./arb_data.csv
+        docker cp test-app-container:/app/shot1.png ./shot1.png
+        docker cp test-app-container:/app/shot2.png ./shot2.png
 
-    - name: Save output as an artifact
+    - name: Save screenshots as artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: arb_data
-        path: arb_data.csv
+        name: screenshots
+        path: ./*.png
 
     - name: Clean up
       run: |
