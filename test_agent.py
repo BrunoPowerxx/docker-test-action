@@ -13,6 +13,7 @@ from dotenv import load_dotenv
 
 def test_supaholly():
     load_dotenv()
+    os.getenv('AGENTQL_API_KEY', default=None)
 
     URL = "https://new.hollywoodbets.net/"
 
