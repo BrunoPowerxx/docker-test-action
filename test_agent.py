@@ -7,6 +7,9 @@ import pandas as pd
 import pytest
 import time
 import agentql
+from dotenv import load_dotenv
+
+load_dotenv()
 
 URL = "https://new.hollywoodbets.net/"
 
