@@ -9,19 +9,20 @@ import time
 import agentql
 from dotenv import load_dotenv
 
-load_dotenv()
 
-URL = "https://new.hollywoodbets.net/"
-
-QUERY = """
-{
-    popup_form {
-        close_btn
-    }
-}
-"""
 
 def test_supaholly():
+    load_dotenv()
+
+    URL = "https://new.hollywoodbets.net/"
+
+    QUERY = """
+    {
+        popup_form {
+            close_btn
+        }
+    }
+    """
     
     display = Display(visible=False, size=(1920, 1080))
     display.start()
