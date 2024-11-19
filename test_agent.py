@@ -48,6 +48,7 @@ def test_supaholly():
         page.wait_for_timeout(10000)
 
         page.screenshot(path="after.png", full_page=True)
+        time.sleep(5)
         browser.close()
 
     display_off(display)
