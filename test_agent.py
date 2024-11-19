@@ -34,11 +34,11 @@ def test_supaholly():
         browser = p.chromium.launch(headless=False)
         page = agentql.wrap(browser.new_page())
         page.goto(URL)
-        page.wait_for_timeout(5000)
+        page.wait_for_timeout(10000)
         page.screenshot(path="shot1.png", full_page=True)
         response = page.query_elements(QUERY)
         response.popup_form.close_btn.click()
-        page.wait_for_timeout(5000)
+        page.wait_for_timeout(10000)
         page.screenshot(path="shot2.png", full_page=True)
 
         browser.close()
