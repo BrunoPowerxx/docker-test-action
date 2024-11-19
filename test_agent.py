@@ -12,7 +12,7 @@ import agentql
 
 
 def test_supaholly():
-    URL = "https://new.hollywoodbets.net/"
+    URL = "https://whatmyuseragent.com/"
     QUERY = """
     {
         popup_form {
