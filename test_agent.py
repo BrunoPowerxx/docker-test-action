@@ -36,6 +36,12 @@ def test_supaholly():
         page.goto(URL)
         page.wait_for_timeout(10000)
         page.screenshot(path="before.png", full_page=True)
+                if response.cookies_form.reject_btn != None:
+            # If so, click the close button to reject cookies
+            response.cookies_form.reject_btn.click()
+
+        # Wait for 10 seconds to see the browser in action
+        page.wait_for_timeout(10000)
         try:
             response = page.query_elements(QUERY)
             if response and response.popup_form and response.popup_form.close_btn:
