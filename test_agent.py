@@ -37,9 +37,9 @@ def test_supaholly():
         page.wait_for_timeout(10000)
         page.screenshot(path="before.png", full_page=True)
         response = page.query_elements(QUERY)
-        if response.cookies_form.reject_btn != None:
+        if response.popup_form.close_btn != None:
             
-            response.cookies_form.reject_btn.click()
+            response.popup_form.close_btn.click()
 
         page.wait_for_timeout(10000)
         #try:
