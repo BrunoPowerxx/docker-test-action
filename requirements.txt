@@ -1,8 +1,8 @@
+pytest
+pandas
 agentql
 asyncio
+thefuzz
 playwright
 python-dotenv
-pandas
-pytest
-thefuzz
 pyvirtualdisplay
