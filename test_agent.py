@@ -45,6 +45,7 @@ def test_supaholly():
                 print("Popup or close button not found in response.")
         except Exception as e:
             print(f"Error while trying to close the popup: {e}")
+        page.wait_for_timeout(10000)
 
         page.screenshot(path="after.png", full_page=True)
         browser.close()
