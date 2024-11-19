@@ -36,22 +36,22 @@ def test_supaholly():
         page.goto(URL)
         page.wait_for_timeout(10000)
         page.screenshot(path="before.png", full_page=True)
-                if response.cookies_form.reject_btn != None:
-            # If so, click the close button to reject cookies
+        response = page.query_elements(QUERY)
+        if response.cookies_form.reject_btn != None:
+            
             response.cookies_form.reject_btn.click()
 
-        # Wait for 10 seconds to see the browser in action
         page.wait_for_timeout(10000)
-        try:
-            response = page.query_elements(QUERY)
-            if response and response.popup_form and response.popup_form.close_btn:
-                response.popup_form.close_btn.click()
-                page.wait_for_timeout(2000)  # Allow some time for the popup to close
-            else:
-                print("Popup or close button not found in response.")
-        except Exception as e:
-            print(f"Error while trying to close the popup: {e}")
-        page.wait_for_timeout(10000)
+        #try:
+            #response = page.query_elements(QUERY)
+            #if response and response.popup_form and response.popup_form.close_btn:
+                #response.popup_form.close_btn.click()
+                #page.wait_for_timeout(2000)  # Allow some time for the popup to close
+            #else:
+                #print("Popup or close button not found in response.")
+        #except Exception as e:
+            #print(f"Error while trying to close the popup: {e}")
+        #page.wait_for_timeout(10000)
 
         page.screenshot(path="after.png", full_page=True)
         time.sleep(5)
