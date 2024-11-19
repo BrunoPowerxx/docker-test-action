@@ -7,8 +7,6 @@ RUN pip install -r requirements.txt
 
 RUN playwright install --with-deps
 
-RUN playwright install
-
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     libnss3 \
