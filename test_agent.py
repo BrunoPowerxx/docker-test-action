@@ -24,9 +24,7 @@ def test_supaholly():
     display = Display(visible=False, size=(1920, 1080))
     display.start()
     display_on()
-
-    with sync_playwright() as p:
-        
+    with sync_playwright() as p:        
         browser = p.chromium.launch(headless=False)
         page = agentql.wrap(browser.new_page())
         page.goto(URL)
