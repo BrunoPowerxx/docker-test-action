@@ -32,7 +32,6 @@ def test_supaholly():
         page.screenshot(path="before.png", full_page=True)
         response = page.query_elements(QUERY)
         if response.popup_form.close_btn != None:
-            
             response.popup_form.close_btn.click()
 
         page.wait_for_timeout(10000)
