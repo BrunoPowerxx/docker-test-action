@@ -19,8 +19,8 @@ jobs:
         docker run --name test-app-container "${{ secrets.DOCKER_USER }}/test-app"
     - name: Copy screenshots from container
       run: |
-        docker cp test-app-container:/app/shot1.png ./shot1.png
-        docker cp test-app-container:/app/shot2.png ./shot2.png
+        docker cp test-app-container:/app/before.png ./before.png
+        docker cp test-app-container:/app/after.png ./after.png
 
     - name: Save screenshots as artifacts
       uses: actions/upload-artifact@v3
