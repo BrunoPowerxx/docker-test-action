@@ -1,0 +1,20 @@
+from urllib.parse import urlparse
+
+# Parse the proxy URL
+proxy_url = urlparse("http://username:password@hostname:port")
+
+# Extract the username and password
+username = proxy_url.username
+password = proxy_url.password
+
+# Extract the host and port
+host = proxy_url.hostname
+port = proxy_url.port
+
+            headless=False,
+            proxy={
+                "server": f"http://{host}:{port}",
+                "username": username,
+                "password": password
+            }
+        )
