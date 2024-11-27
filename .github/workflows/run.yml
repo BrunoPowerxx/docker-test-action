@@ -20,7 +20,6 @@ jobs:
     - name: Copy screenshots from container
       run: |
         docker cp test-app-container:/app/before.png ./adblock.png
-        #docker cp test-app-container:/app/after.png ./after.png
 
     - name: Save screenshots as artifacts
       uses: actions/upload-artifact@v3
