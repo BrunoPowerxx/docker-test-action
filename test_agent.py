@@ -1,17 +1,38 @@
 from playwright.sync_api import sync_playwright
+from chrome_extension_python import Extension
 from pyvirtualdisplay import Display
 from collections import namedtuple
 from phunctions import *
 from klasses import *
 import pandas as pd
+import agentql
+import random
 import pytest
 import time
-import agentql
-#from dotenv import load_dotenv
+
+det test_cxr():
+    def generate_random_profile():
+        return str(random.randint(1, 1000))
+
+    with sync_playwright() as p:
+    extension_path = Extension("https://chromewebstore.google.com/detail/adblock-%E2%80%94-best-ad-blocker/gighmmpiobklfepjocnamgkkbiglidom").load(with_command_line_option=False)
+    browser = p.chromium.launch_persistent_context(
+        user_data_dir=generate_random_profile(),
+        headless=False,
+        args=[
+            '--disable-extensions-except='+ extension_path,
+            '--load-extension=' + extension_path,
+        ],
+    )
+    page = browser.new_page()
+    page.goto("https://chromewebstore.google.com/detail/adblock-%E2%80%94-best-ad-blocker/gighmmpiobklfepjocnamgkkbiglidom")
+    page.wait_for_load_state('load')
+    page.screenshot(path="adblock.png", full_page=True)
+    time.sleep(3)
+    browser.close()
 
 
-
-def test_supaholly():
+def rest_supaholly():
     URL = "https://whatmyuseragent.com/"
     QUERY = """
     {
