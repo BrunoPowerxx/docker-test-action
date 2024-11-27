@@ -6,7 +6,8 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 RUN python -m pip install chrome_extension_python
 RUN playwright install --with-deps
-
+RUN apt install -y openvpn dialog python3-pip python3-setuptools
+RUN pip3 install protonvpn-cli
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     libnss3 \
