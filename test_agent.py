@@ -15,8 +15,9 @@ def test_cxr():
         return str(random.randint(1, 1000))
 
     with sync_playwright() as p:
-    extension_path = Extension("https://chromewebstore.google.com/detail/adblock-%E2%80%94-best-ad-blocker/gighmmpiobklfepjocnamgkkbiglidom").load(with_command_line_option=False)
-    browser = p.chromium.launch_persistent_context(
+        
+        extension_path = Extension("https://chromewebstore.google.com/detail/adblock-%E2%80%94-best-ad-blocker/gighmmpiobklfepjocnamgkkbiglidom").load(with_command_line_option=False)
+        browser = p.chromium.launch_persistent_context(
         user_data_dir=generate_random_profile(),
         headless=False,
         args=[
@@ -24,12 +25,12 @@ def test_cxr():
             '--load-extension=' + extension_path,
         ],
     )
-    page = browser.new_page()
-    page.goto("https://chromewebstore.google.com/detail/adblock-%E2%80%94-best-ad-blocker/gighmmpiobklfepjocnamgkkbiglidom")
-    page.wait_for_load_state('load')
-    page.screenshot(path="adblock.png", full_page=True)
-    time.sleep(3)
-    browser.close()
+        page = browser.new_page()
+        page.goto("https://chromewebstore.google.com/detail/adblock-%E2%80%94-best-ad-blocker/gighmmpiobklfepjocnamgkkbiglidom")
+        page.wait_for_load_state('load')
+        page.screenshot(path="adblock.png", full_page=True)
+        time.sleep(3)
+        browser.close()
 
 
 def rest_supaholly():
