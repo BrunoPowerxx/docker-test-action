@@ -10,7 +10,7 @@ import random
 import pytest
 import time
 
-det test_cxr():
+def test_cxr():
     def generate_random_profile():
         return str(random.randint(1, 1000))
 
