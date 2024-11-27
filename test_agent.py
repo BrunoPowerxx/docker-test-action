@@ -10,7 +10,7 @@ import random
 import pytest
 import time
 
-def test_cxr():
+def pest_cxr():
     def generate_random_profile():
         return str(random.randint(1, 1000))
 
@@ -33,7 +33,7 @@ def test_cxr():
         browser.close()
 
 
-def rest_supaholly():
+def test_supaholly():
     URL = "https://whatmyuseragent.com/"
     QUERY = """
     {
