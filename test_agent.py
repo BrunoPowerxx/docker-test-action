@@ -11,6 +11,9 @@ import pytest
 import time
 
 def test_cxr():
+    display = Display(visible=False, size=(1920, 1080))
+    display.start()
+    display_on()
     def generate_random_profile():
         return str(random.randint(1, 1000))
 
@@ -31,6 +34,7 @@ def test_cxr():
         page.screenshot(path="adblock.png", full_page=True)
         time.sleep(3)
         browser.close()
+    display_off(display)
 
 
 def rest_supaholly():
