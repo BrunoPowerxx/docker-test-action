@@ -23,7 +23,9 @@ def test_user():
         page = agentql.wrap(browser.new_page())
         page.goto(URL)
         page.wait_for_timeout(10000)
-        page.screenshot(path=OUTPUT_DIR, full_page=True)
+        screenshot_path = os.path.join(OUTPUT_DIR, "ua.png")
+       
+        page.screenshot(path=screenshot_path, full_page=True)
         time.sleep(5)
         browser.close()
 
