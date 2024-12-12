@@ -1,4 +1,14 @@
-
+from playwright.sync_api import sync_playwright
+from chrome_extension_python import Extension
+from pyvirtualdisplay import Display
+from collections import namedtuple
+from phunctions import *
+from klasses import *
+import pandas as pd
+import agentql
+import random
+import pytest
+import time
 
 def rest_supaholly():
     URL = "https://whatmyuseragent.com/"
