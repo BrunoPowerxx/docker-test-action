@@ -10,16 +10,8 @@ import random
 import pytest
 import time
 
-def rest_supaholly():
+def test_user():
     URL = "https://whatmyuseragent.com/"
-    QUERY = """
-    {
-        popup_form {
-            close_btn
-        }
-    }
-    """
-
     display = Display(visible=False, size=(1920, 1080))
     display.start()
     display_on()
@@ -28,14 +20,7 @@ def rest_supaholly():
         page = agentql.wrap(browser.new_page())
         page.goto(URL)
         page.wait_for_timeout(10000)
-        page.screenshot(path="before.png", full_page=True)
-        response = page.query_elements(QUERY)
-        if response.popup_form.close_btn != None:
-            response.popup_form.close_btn.click()
-
-        page.wait_for_timeout(10000)
-
-        page.screenshot(path="after.png", full_page=True)
+        page.screenshot(path="ua.png", full_page=True)
         time.sleep(5)
         browser.close()
 
