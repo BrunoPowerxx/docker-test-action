@@ -9,8 +9,11 @@ import agentql
 import random
 import pytest
 import time
+import os
 
 def test_user():
+    OUTPUT_DIR = "/output"
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
     URL = "https://whatmyuseragent.com/"
     display = Display(visible=False, size=(1920, 1080))
     display.start()
@@ -20,7 +23,7 @@ def test_user():
         page = agentql.wrap(browser.new_page())
         page.goto(URL)
         page.wait_for_timeout(10000)
-        page.screenshot(path="ua.png", full_page=True)
+        page.screenshot(path=OUTPUT_DIR, full_page=True)
         time.sleep(5)
         browser.close()
 
