@@ -1,4 +1,4 @@
-name: Docker Github Actions
+name: build test bookies
 
 on: [workflow_dispatch]
 
