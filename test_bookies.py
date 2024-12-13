@@ -11,7 +11,7 @@ import time
 
 
 def test_bookies():
-    URL = ["https://whatmyuseragent.com/", "https://www.betus.com.pa/sportsbook/", "https://sports.betmgm.com/en/sports"]
+    URL = ["https://whatmyuseragent.com/", "https://www.betus.com.pa/sportsbook/", "https://sports.betmgm.com/en/sports", "https://sportsbook.draftkings.com/"]
     display = Display(visible=False, size=(1920, 1080))
     display.start()
     display_on()
