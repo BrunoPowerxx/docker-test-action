@@ -14,14 +14,16 @@ jobs:
       run: |
         docker pull "${{ secrets.DOCKER_USER }}/test-bookies"
 
-    - name: Run Docker Container
+- name: Run Docker Container with Volume
       run: |
-        docker run --name test-bookies-container "${{ secrets.DOCKER_USER }}/test-bookies"
-    - name: Copy screenshots from container
-      run: |
-        docker cp test-bookies-container:/app/shot1.png ./shot1.png
-        docker cp test-bookies-container:/app/shot2.png ./shot2.png
-        docker cp test-bookies-container:/app/shot3.png ./shot3.png
+        mkdir -p screenshots
+        docker run --name test-bookies-container -v ${{ runner.workspace }}/screenshots:/app/screenshots "${{ secrets.DOCKER_USER }}/test-bookies"
+
+    - name: Save Screenshots as Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: screenshots
+        path: screenshots/*.png
 
     - name: Save screenshots as artifacts
       uses: actions/upload-artifact@v3
