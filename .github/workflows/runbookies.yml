@@ -1,1 +1,34 @@
-y
+name: Pull and Run Docker Image
+
+on: [workflow_dispatch]
+
+jobs:
+  pull_and_run:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Docker Login
+      run: |
+        echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
+
+    - name: Pull Docker Image
+      run: |
+        docker pull "${{ secrets.DOCKER_USER }}/test-bookies"
+
+    - name: Run Docker Container
+      run: |
+        docker run --name test-bookies-container "${{ secrets.DOCKER_USER }}/test-bookies"
+    - name: Copy screenshots from container
+      run: |
+        docker cp test-bookies-container:/app/shot1.png ./shot1.png
+        docker cp test-bookies-container:/app/shot2.png ./shot2.png
+        docker cp test-bookies-container:/app/shot3.png ./shot3.png
+
+    - name: Save screenshots as artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: screenshots
+        path: ./*.png
+
+    - name: Clean up
+      run: |
+        docker rm test-bookies-container
