@@ -1,4 +1,4 @@
-name: Pull and Run Docker Image
+name: pull and run test bookies
 
 on: [workflow_dispatch]
 
