@@ -21,7 +21,7 @@ def test_bookies():
         for index in range(len(URL)):
             page.goto(URL[index])
             page.wait_for_timeout(10000)
-            page.screenshot(path=f"shot{index + 1}.png", full_page=True)
+            page.screenshot(path=f"/app/screenshots/shot{index + 1}.png", full_page=True)
             time.sleep(5)
         browser.close()
 
