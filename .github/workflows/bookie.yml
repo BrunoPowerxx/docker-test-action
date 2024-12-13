@@ -15,8 +15,8 @@ jobs:
 
     - name: Docker Build
       run: |
-        docker build -t "${{ secrets.DOCKER_USER }}/test-bookie" .
+        docker build -t "${{ secrets.DOCKER_USER }}/test-bookies" .
 
     - name: Docker Push
       run: |
-        docker push "${{ secrets.DOCKER_USER }}/test-bookie"
+        docker push "${{ secrets.DOCKER_USER }}/test-bookies"
