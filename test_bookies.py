@@ -17,7 +17,7 @@ def test_bookies():
     host = "41.13.10.77"
     port = "8080"
     with sync_playwright() as p:        
-        browser = p.chromium.launch(headless=False,                        proxy={"server": f"http://{host}:{port}"})
+        browser = p.chromium.launch(headless=False, proxy={"server": f"http://{host}:{port}"})
         #page = agentql.wrap(browser.new_page())
         page = browser.new_page()
 
@@ -45,3 +45,4 @@ def test_bookies():
         browser.close()
 
     display_off(display)
+
