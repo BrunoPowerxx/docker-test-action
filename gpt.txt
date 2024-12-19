@@ -22,6 +22,36 @@ jobs:
       run: |
         docker push "${{ secrets.DOCKER_USER }}/test-bookies"
 
+# run*bookie.yml
+name: pull and run test bookies
+
+on: [workflow_dispatch]
+
+jobs:
+  pull_and_run:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Docker Login
+      run: |
+        echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
+
+    - name: Pull Docker Image
+      run: |
+        docker pull "${{ secrets.DOCKER_USER }}/test-bookies"
+    - name: Run Docker Container with Volume
+      run: |
+        mkdir -p screenshots
+        docker run --name test-bookies-container -v ${{ runner.workspace }}/screenshots:/app/screenshots "${{ secrets.DOCKER_USER }}/test-bookies"
+
+    - name: Save Screenshots as Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: screenshots
+        path: screenshots/*.png
+
+    - name: Clean up
+      run: |
+        docker rm test-bookies-container
 # requirements.txt
 pytest
 pandas
