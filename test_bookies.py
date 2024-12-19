@@ -17,12 +17,26 @@ def test_bookies():
     display_on()
     with sync_playwright() as p:        
         browser = p.chromium.launch(headless=False)
+
         page = agentql.wrap(browser.new_page())
-        for index in range(len(URL)):
-            page.goto(URL[index])
-            page.wait_for_timeout(10000)
-            page.screenshot(path=f"/app/screenshots/shot{index + 1}.png", full_page=True)
-            time.sleep(5)
+
+        page.goto("https://whatmyuseragent.com/')
+        page.wait_for_timeout(5000)
+        page.screenshot(path=f"/app/screenshots/mua.png", full_page=True)
+
+        page.goto("https://www.betus.com.pa/sportsbook/')
+        page.wait_for_timeout(5000)
+        page.screenshot(path=f"/app/screenshots/bus.png", full_page=True)
+
+        page.goto("https://sports.betmgm.com/en/sports')
+        page.wait_for_timeout(5000)
+        page.screenshot(path=f"/app/screenshots/mgm.png", full_page=True)
+
+        page.goto("https://sportsbook.draftkings.com/')
+        page.wait_for_timeout(5000)
+        page.screenshot(path=f"/app/screenshots/dfk.png", full_page=True)         
+
+        time.sleep(5)
         browser.close()
 
     display_off(display)
