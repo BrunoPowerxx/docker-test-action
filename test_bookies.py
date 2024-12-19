@@ -18,7 +18,8 @@ def test_bookies():
     with sync_playwright() as p:        
         browser = p.chromium.launch(headless=False)
 
-        page = agentql.wrap(browser.new_page())
+        #page = agentql.wrap(browser.new_page())
+        page = browser.new_page()
 
         page.goto("https://whatmyuseragent.com/')
         page.wait_for_timeout(5000)
