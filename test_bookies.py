@@ -17,9 +17,11 @@ def test_bookies():
     host = "41.13.10.77"
     port = "8080"
     with sync_playwright() as p:        
-        browser = p.chromium.launch(headless=False, proxy={"server": f"http://{host}:{port}"})
+        browser = p.chromium.launch(headless=False, proxy={"server": "http://41.13.10.77:8080"})
+        context = browser.new_context()
         #page = agentql.wrap(browser.new_page())
-        page = browser.new_page()
+        
+        page = context.new_page()
 
         page.goto("https://whatmyuseragent.com/")
         page.wait_for_timeout(5000)
