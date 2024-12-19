@@ -22,7 +22,14 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: screenshots
-        path: /screenshots
+        path: app/screenshots
+
+
+    - name: Save Screenshots as Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: screenshots
+        path: app/screenshots/
 
     - name: Clean up
       run: |
