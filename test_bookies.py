@@ -21,19 +21,19 @@ def test_bookies():
         #page = agentql.wrap(browser.new_page())
         page = browser.new_page()
 
-        page.goto("https://whatmyuseragent.com/')
+        page.goto("https://whatmyuseragent.com/")
         page.wait_for_timeout(5000)
         page.screenshot(path=f"/app/screenshots/mua.png", full_page=True)
 
-        page.goto("https://www.betus.com.pa/sportsbook/')
+        page.goto("https://www.betus.com.pa/sportsbook/")
         page.wait_for_timeout(5000)
         page.screenshot(path=f"/app/screenshots/bus.png", full_page=True)
 
-        page.goto("https://sports.betmgm.com/en/sports')
+        page.goto("https://sports.betmgm.com/en/sports")
         page.wait_for_timeout(5000)
         page.screenshot(path=f"/app/screenshots/mgm.png", full_page=True)
 
-        page.goto("https://sportsbook.draftkings.com/')
+        page.goto("https://sportsbook.draftkings.com/")
         page.wait_for_timeout(5000)
         page.screenshot(path=f"/app/screenshots/dfk.png", full_page=True)         
 
