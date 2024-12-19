@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY requirements.txt . 
 RUN pip install -r requirements.txt
-RUN python -m pip install chrome_extension_python
+#RUN python -m pip install chrome_extension_python
 RUN playwright install --with-deps
 #RUN apt install -y openvpn dialog #python3-pip python3-setuptools
 #RUN pip3 install protonvpn-cli
@@ -30,5 +30,5 @@ RUN apt-get update && apt-get install -y \
     
 COPY . .
 
-RUN chmod +x run.sh
-CMD ["./run.sh"]
+RUN chmod +x new.sh
+CMD ["./new.sh"]
