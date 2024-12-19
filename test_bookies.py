@@ -11,19 +11,23 @@ import time
 
 
 def test_bookies():
-    URL = ["https://whatmyuseragent.com/", "https://www.betus.com.pa/sportsbook/", "https://sports.betmgm.com/en/sports", "https://sportsbook.draftkings.com/"]
     display = Display(visible=False, size=(1920, 1080))
     display.start()
     display_on()
+    host = "41.13.10.77"
+    port = "8080"
     with sync_playwright() as p:        
-        browser = p.chromium.launch(headless=False)
-
+        browser = p.chromium.launch(headless=False,                        proxy={"server": f"http://{host}:{port}"})
         #page = agentql.wrap(browser.new_page())
         page = browser.new_page()
 
-        page.goto("https://whatmyuseragent.com/")
+        page.goto("https://ipapi.is/")
         page.wait_for_timeout(5000)
         page.screenshot(path="mua.png", full_page=True)
+
+        page.goto("https://www.new.hollywoodbets.net/")
+        page.wait_for_timeout(5000)
+        page.screenshot(path="hwb.png", full_page=True)
 
         page.goto("https://www.betus.com.pa/sportsbook/")
         page.wait_for_timeout(5000)
