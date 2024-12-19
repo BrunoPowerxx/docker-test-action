@@ -1,3 +1,13 @@
+# requirements.txt
+pytest
+pandas
+agentql
+asyncio
+thefuzz
+playwright
+python-dotenv
+pyvirtualdisplay
+
 # run.sh
 #!/bin/sh
 agentql init
