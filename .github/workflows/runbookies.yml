@@ -21,6 +21,7 @@ jobs:
     - name: Copy Screenshots from Container
       run: |
         docker cp test-bookies-container:/app/mua.png ./mua.png
+        docker cp test-bookies-container:/app/hwb.png ./hwb.png
         docker cp test-bookies-container:/app/bus.png ./bus.png
         docker cp test-bookies-container:/app/mgm.png ./mgm.png
         docker cp test-bookies-container:/app/dfk.png ./dfk.png
