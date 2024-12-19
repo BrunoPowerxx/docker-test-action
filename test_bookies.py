@@ -21,7 +21,7 @@ def test_bookies():
         #page = agentql.wrap(browser.new_page())
         page = browser.new_page()
 
-        page.goto("https://whatsmyuseragent.com/")
+        page.goto("https://whatmyuseragent.com/")
         page.wait_for_timeout(5000)
         page.screenshot(path="mua.png", full_page=True)
 
