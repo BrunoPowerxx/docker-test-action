@@ -23,19 +23,19 @@ def test_bookies():
 
         page.goto("https://whatmyuseragent.com/")
         page.wait_for_timeout(5000)
-        page.screenshot(path=f"/app/screenshots/mua.png", full_page=True)
+        page.screenshot(path="mua.png", full_page=True)
 
         page.goto("https://www.betus.com.pa/sportsbook/")
         page.wait_for_timeout(5000)
-        page.screenshot(path=f"/app/screenshots/bus.png", full_page=True)
+        page.screenshot(path="bus.png", full_page=True)
 
         page.goto("https://sports.betmgm.com/en/sports")
         page.wait_for_timeout(5000)
-        page.screenshot(path=f"/app/screenshots/mgm.png", full_page=True)
+        page.screenshot(path="mgm.png", full_page=True)
 
         page.goto("https://sportsbook.draftkings.com/")
         page.wait_for_timeout(5000)
-        page.screenshot(path=f"/app/screenshots/dfk.png", full_page=True)         
+        page.screenshot(path="dfk.png", full_page=True)         
 
         time.sleep(5)
         browser.close()
