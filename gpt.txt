@@ -1,3 +1,46 @@
+# test_bookies.py
+from playwright.sync_api import sync_playwright
+from pyvirtualdisplay import Display
+from collections import namedtuple
+from phunctions import *
+from klasses import *
+import pandas as pd
+import agentql
+import random
+import pytest
+import time
+
+
+def test_bookies():
+    URL = ["https://whatmyuseragent.com/", "https://www.betus.com.pa/sportsbook/", "https://sports.betmgm.com/en/sports", "https://sportsbook.draftkings.com/"]
+    display = Display(visible=False, size=(1920, 1080))
+    display.start()
+    display_on()
+    with sync_playwright() as p:        
+        browser = p.chromium.launch(headless=False)
+        page = agentql.wrap(browser.new_page())
+        for index in range(len(URL)):
+            page.goto(URL[index])
+            page.wait_for_timeout(10000)
+            page.screenshot(path=f"/app/screenshots/shot{index + 1}.png", full_page=True)
+            time.sleep(5)
+        browser.close()
+
+    display_off(display)
+
+# phunctions
+from pyvirtualdisplay import Display
+
+def display_on():
+    display = Display(visible=False, size=(1920, 1080))
+    display.start()
+    return display
+
+def display_off(display):
+    display.stop()
+
+# dockerfile
+
 FROM python:3.9-slim
 
 WORKDIR /app
@@ -32,6 +75,8 @@ COPY . .
 
 RUN chmod +x run.sh
 CMD ["./run.sh"]
+
+# excerpt of github actions output
 
 ﻿2024-12-13T10:00:53.2420818Z ##[group]Run mkdir -p screenshots
 mkdir -p screenshots
