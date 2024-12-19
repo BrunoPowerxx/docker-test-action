@@ -1,0 +1,38 @@
+﻿2024-12-13T10:00:53.2420818Z ##[group]Run mkdir -p screenshots
+mkdir -p screenshots
+docker run --name test-bookies-container -v /home/runner/work/docker-test-action/screenshots:/app/screenshots "***/test-bookies"
+shell: /usr/bin/bash -e {0}
+Installing dependencies...
+Get your AgentQL API key at https://dev.agentql.com
+Aborted.
+Enter your AgentQL API key: export GPG_KEY='E3FF2839C048B25C084DEBE9B26995E310250568'
+export HOME='/root'
+export HOSTNAME='ca6b7ab7dc44'
+export LANG='C.UTF-8'
+export PATH='/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+export PWD='/app'
+export PYTHON_SHA256='3126f59592c9b0d798584755f2bf7b081fa1ca35ce7a6fea980108d752a05bb1'
+export PYTHON_VERSION='3.9.21'
+/usr/local/lib/python3.9/site-packages/pytest_asyncio/plugin.py:207: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================= test session starts ==============================
+platform linux -- Python 3.9.21, pytest-8.3.4, pluggy-1.5.0 -- /usr/local/bin/python3.9
+cachedir: .pytest_cache
+rootdir: /app
+plugins: anyio-4.7.0, mockito-0.0.4, asyncio-0.25.0
+asyncio: mode=strict, asyncio_default_fixture_loop_scope=None
+collecting ... collected 1 item
+
+test_bookies.py::test_bookies PASSED
+
+========================= 1 passed in 72.26s (0:01:12) =========================
+
+2024-12-13T10:02:07.1594201Z ##[group]Run actions/upload-artifact@v3
+with:
+  name: screenshots
+  path: screenshots/*.png
+  if-no-files-found: warn
+  include-hidden-files: false
+No files were found with the provided path: screenshots/*.png. No artifacts will be uploaded.
