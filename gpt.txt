@@ -1,3 +1,27 @@
+# build_bookie.yml (by the way, do yml files use _ or - for complex names?)
+name: build test bookies
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Docker Login
+      run: |
+        echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
+
+    - name: Docker Build
+      run: |
+        docker build -t "${{ secrets.DOCKER_USER }}/test-bookies" .
+
+    - name: Docker Push
+      run: |
+        docker push "${{ secrets.DOCKER_USER }}/test-bookies"
+
 # requirements.txt
 pytest
 pandas
