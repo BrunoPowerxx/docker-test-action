@@ -18,19 +18,21 @@ jobs:
         mkdir -p screenshots
         docker run --name test-bookies-container -v ${{ runner.workspace }}/screenshots:/app/screenshots "${{ secrets.DOCKER_USER }}/test-bookies"
 
-    - name: Save Screenshots as Artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: screenshots
-        path: app/screenshots
+    - name: Copy Screenshots from Container
+      run: |
+        docker cp test-bookies-container:/app/mua.png ./mua.png
+        docker cp test-bookies-container:/app/bus.png ./bus.png
+        docker cp test-bookies-container:/app/mgm.png ./mgm.png
+        docker cp test-bookies-container:/app/dfk.png ./dfk.png
 
 
     - name: Save Screenshots as Artifacts
       uses: actions/upload-artifact@v3
       with:
         name: screenshots
-        path: app/screenshots/
+        path: ./*.png
 
     - name: Clean up
       run: |
         docker rm test-bookies-container
+
