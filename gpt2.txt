@@ -1,0 +1,43 @@
+name: Run Webtop and Get Host IP
+
+on: workflow_dispatch
+
+jobs:
+  run-webtop:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code (optional)
+      uses: actions/checkout@v3
+
+    - name: Create data directory
+      run: mkdir -p data
+    - name: Docker Login
+      run: |
+        echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
+
+    - name: Run Webtop container
+      run: |
+        docker run -i -d \
+          --name=webtop \
+          --security-opt seccomp=unconfined \
+          -e PUID=$(id -u) \
+          -e PGID=$(id -g) \
+          -e TZ=Africa/Johannesburg \
+          -e TITLE=Webtop \
+          -p 3000:3000 \
+          -p 3001:3001 \
+          -v $(pwd)/data:/config \
+          -v /var/run/docker.sock:/var/run/docker.sock \
+          --device /dev/dri:/dev/dri \
+          --shm-size="1gb" \
+          --restart unless-stopped \
+          lscr.io/linuxserver/webtop:ubuntu-mate
+
+    - name: Print Public IP of GitHub Actions Runner
+      run: |
+        echo "Public IP Address of the GitHub Actions Runner:"
+        curl -s https://ipinfo.io/ip
+
+
+I want to create another runner which I can use to stop the webtop container
