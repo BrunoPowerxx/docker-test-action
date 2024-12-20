@@ -18,7 +18,7 @@ jobs:
 
     - name: Run Webtop container
       run: |
-        docker run -d \
+        docker run -i -d \
           --name=webtop \
           --security-opt seccomp=unconfined \
           -e PUID=$(id -u) \
