@@ -1,24 +1,38 @@
-name: I Wish I Were Dead
+name: Run Webtop and Get Host IP
 
-on: workflow_dispatch
+on:
+  workflow_dispatch: # Allows manual trigger
 
 jobs:
-  print-env:
+  run-webtop:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check UID and GID
-        run: |
-          echo "PUID=$(id -u)"
-          echo "PGID=$(id -g)"
-          echo "User: $(whoami)"
-          echo "Home Directory: $HOME"
-          echo "Shell: $SHELL"
-      - name: Get Public IP Address
-        run: curl -s https://ipinfo.io/ip
+    - name: Checkout code (optional)
+      uses: actions/checkout@v3
 
-      - name: Get Internal IP Address
-        run: hostname -I | awk '{print $1}'
+    - name: Create data directory
+      run: mkdir -p data
 
-      - name: Get Network Interfaces
-        run: ip addr
+    - name: Run Webtop container
+      run: |
+        docker run -d \
+          --name=webtop \
+          --security-opt seccomp=unconfined \
+          -e PUID=$(id -u) \
+          -e PGID=$(id -g) \
+          -e TZ=Africa/Johannesburg \
+          -e TITLE=Webtop \
+          -p 3000:3000 \
+          -p 3001:3001 \
+          -v $(pwd)/data:/config \
+          -v /var/run/docker.sock:/var/run/docker.sock \
+          --device /dev/dri:/dev/dri \
+          --shm-size="1gb" \
+          --restart unless-stopped \
+          lscr.io/linuxserver/webtop:ubuntu-mate
+
+    - name: Print Public IP of GitHub Actions Runner
+      run: |
+        echo "Public IP Address of the GitHub Actions Runner:"
+        curl -s https://ipinfo.io/ip
