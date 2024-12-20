@@ -1,0 +1,16 @@
+name: I Wish I Were Dead
+
+on: workflow_dispatch
+
+jobs:
+  print-env:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check UID and GID
+        run: |
+          echo "PUID=$(id -u)"
+          echo "PGID=$(id -g)"
+          echo "User: $(whoami)"
+          echo "Home Directory: $HOME"
+          echo "Shell: $SHELL"
