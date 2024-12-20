@@ -1,7 +1,6 @@
 name: Run Webtop and Get Host IP
 
-on:
-  workflow_dispatch: # Allows manual trigger
+on: workflow_dispatch
 
 jobs:
   run-webtop:
