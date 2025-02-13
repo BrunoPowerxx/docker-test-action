@@ -1,0 +1,34 @@
+name: pull and run test bookies
+
+on: [workflow_dispatch]
+
+jobs:
+  pull_and_run:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Docker Login
+      run: |
+        echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
+
+    - name: Pull Docker Image
+      run: |
+        docker pull "${{ secrets.DOCKER_USER }}/test-bookies"
+
+    - name: Run Docker Container
+      run: |
+        mkdir -p logs
+        docker run --name test-bookies-container -v ${{ runner.workspace }}/logs:/app/logs "${{ secrets.DOCKER_USER }}/test-bookies"
+
+    - name: Copy Network Requests Log from Container
+      run: |
+        docker cp test-bookies-container:/app/network_requests.json ./network_requests.json
+
+    - name: Save Log as Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: network-requests-log
+        path: ./network_requests.json
+
+    - name: Clean up
+      run: |
+        docker rm test-bookies-container
