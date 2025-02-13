@@ -31,4 +31,4 @@ RUN apt-get update && apt-get install -y \
 COPY . .
 
 RUN chmod +x new.sh
-CMD ["./new.sh"]
+CMD ["./run.sh"]
