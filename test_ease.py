@@ -6,11 +6,6 @@ import agentql
 import json
 import time
 
-from playwright.sync_api import sync_playwright
-from agentql.ext.playwright.sync_api import Page
-from pyvirtualdisplay import Display
-import json
-
 def test_requests():
     def intercept_route(route):  
         request = route.request  
