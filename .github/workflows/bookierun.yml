@@ -1,4 +1,4 @@
-name: pull and run test bookies
+name: pull test ease
 
 on: [workflow_dispatch]
 
