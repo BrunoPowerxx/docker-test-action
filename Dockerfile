@@ -30,5 +30,5 @@ RUN apt-get update && apt-get install -y \
     
 COPY . .
 
-RUN chmod +x new.sh
+RUN chmod +x run.sh
 CMD ["./run.sh"]
