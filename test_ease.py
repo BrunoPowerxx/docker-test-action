@@ -17,7 +17,7 @@ def test_requests():
     display = Display(visible=False, size=(1920, 1080))  
     display.start()  
 
-    with sync_playwright() as p, p.chromium.launch(headless=True) as browser:
+    with sync_playwright() as p, p.chromium.launch(headless=False) as browser:
         context = browser.new_context()
         page = agentql.wrap(context.new_page())
 
