@@ -1,4 +1,4 @@
-name: build test bookies
+name: build test ease
 
 on: [workflow_dispatch]
 
