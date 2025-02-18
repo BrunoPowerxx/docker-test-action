@@ -51,5 +51,8 @@ def test_main():
         end_time = time.perf_counter()
         browser.close()
     display.stop
-    
+        with open("network_requests.json", "w") as file:
+        json.dump(request_log, file, indent=2)
+
+    print("Network requests saved to network_requests.json")
     print(f"for loop executed in {end_time - start_time:.2f} seconds")
