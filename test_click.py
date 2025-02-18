@@ -57,6 +57,6 @@ def test_main():
             print(f"Page {index}: {link}")
 
             
-       browser.close()
+        browser.close()
     display.stop
     print(f"for loop executed in {end_time - start_time:.2f} seconds")
