@@ -43,7 +43,7 @@ def test_main():
             #new_page = browser.new_page()  # Open a new tab
             page.wait_for_load_state("networkidle")
             team.click()
-            page.wait_for_load_state("networkidle")
+            #page.wait_for_load_state("networkidle")
 # Store the new page object and URL
             link = page.url
 
