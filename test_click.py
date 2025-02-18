@@ -40,15 +40,14 @@ def test_main():
         start_time = time.perf_counter()
         supa_links = []
         for index, team in enumerate(home_teams):
-            #new_page = browser.new_page()  # Open a new tab
-            page.wait_for_load_state("networkidle")
-            team.click()
+            team[index].click()
 # Store the new page object and URL
             link = page.url
 
             new_page.screenshot(path=f"/app/shots/img_{index}.png", full_page=True)
             supa_links.append(link)
-            #new_page.close()
+            page.goto(URL)
+            page.wait_for_load_state("networkidle")
 
 #time.sleep(2)
 
