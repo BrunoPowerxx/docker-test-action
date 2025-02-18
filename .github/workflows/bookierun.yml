@@ -35,7 +35,7 @@ jobs:
         docker cp test-bookies-container:/app/img_*.png ./img_*.png
 
     - name: Save Screenshots as Artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: screenshots
         path: ./*.png
