@@ -46,7 +46,7 @@ def test_main():
 # Store the new page object and URL
             link = page.url
 
-            new_page.screenshot(path=f"/app/shots/img_{index}.png", full_page=True)
+            page.screenshot(path=f"/app/shots/img_{index}.png", full_page=True)
             supa_links.append(link)
             page.goto(URL)
             page.wait_for_load_state("load")
