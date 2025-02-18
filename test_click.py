@@ -33,7 +33,7 @@ def test_main():
         #page.route("**", intercept_route)
         page.goto(URL)
         page.wait_for_load_state("networkidle")
-        page.screenshot(path="before.png", full_page=True)
+        page.screenshot(path="/app/shots/before.png", full_page=True)
         homepage = page.query_elements(SPORTS_PAGE)
         home_teams = homepage.league_group_container.match_containers
         #get_response(page)
@@ -41,7 +41,7 @@ def test_main():
         for index, team in enumerate(home_teams):
             team = homepage.league_group_container.match_containers[index].home
             team.click(button="right")
-            page.screenshot(path=f"img_{index}.png", full_page=True)
+            page.screenshot(path=f"/app/shots/img_{index}.png", full_page=True)
             time.sleep(2)
         end_time = time.perf_counter()
         browser.close()
