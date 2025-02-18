@@ -32,7 +32,8 @@ def test_main():
         # Navigate to the desired URL
         #page.route("**", intercept_route)
         page.goto(URL)
-        page.wait_for_load_state("networkidle")
+        print(page.content())
+        page.wait_for_load_state("load")
         page.screenshot(path="/app/shots/before.png", full_page=True)
         homepage = page.query_elements(SPORTS_PAGE)
         home_teams = homepage.league_group_container.match_containers
@@ -41,14 +42,14 @@ def test_main():
         supa_links = []
         for index in range(len(home_teams)):
             home_teams[index].home.click()
-            page.wait_for_load_state("networkidle")
+            page.wait_for_load_state("load")
 # Store the new page object and URL
             link = page.url
 
             new_page.screenshot(path=f"/app/shots/img_{index}.png", full_page=True)
             supa_links.append(link)
             page.goto(URL)
-            page.wait_for_load_state("networkidle")
+            page.wait_for_load_state("load")
 
 #time.sleep(2)
 
