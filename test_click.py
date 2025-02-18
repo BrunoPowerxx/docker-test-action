@@ -12,12 +12,6 @@ URL = "https://www.supabets.co.za/"
 
 
 def test_main():
-    def intercept_route(route):
-        request = route.request
-        request_log.append(request.url)  # Append URL to list
-        route.continue_()  
-
-        request_log = []  # List to store all request URLs
     display = Display(visible=False, size=(1920, 1080))
     display.start()
     with sync_playwright() as p, p.chromium.launch(headless=False) as browser:
@@ -36,7 +30,7 @@ def test_main():
 }
     """
         # Navigate to the desired URL
-        page.route("**", intercept_route)
+        #page.route("**", intercept_route)
         page.goto(URL)
         page.wait_for_load_state("networkidle")
         page.screenshot(path="before.png", full_page=True)
@@ -52,8 +46,4 @@ def test_main():
         end_time = time.perf_counter()
         browser.close()
     display.stop
-    with open("network_requests.json", "w") as file:
-        json.dump(request_log, file, indent=2)
-
-    print("Network requests saved to network_requests.json")
     print(f"for loop executed in {end_time - start_time:.2f} seconds")
