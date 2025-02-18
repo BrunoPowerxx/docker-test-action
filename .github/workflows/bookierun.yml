@@ -19,16 +19,6 @@ jobs:
         mkdir -p logs
         docker run --name test-bookies-container -v ${{ runner.workspace }}/logs:/app/logs "${{ secrets.DOCKER_USER }}/test-bookies"
 
-    - name: Copy Network Requests Log from Container
-      run: |
-        docker cp test-bookies-container:/app/network_requests.json ./network_requests.json
-
-    - name: Save Log as Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: network-requests-log
-        path: ./network_requests.json
-
     - name: Copy Screenshots from Container
       run: |
         docker cp test-bookies-container:/app/before.png ./before.png
