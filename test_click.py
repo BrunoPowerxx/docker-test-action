@@ -36,7 +36,7 @@ def test_main():
         homepage = page.query_elements(SPORTS_PAGE)
         home_teams = homepage.league_group_container.match_containers
         #get_response(page)
-        for index, team in enumerate(home_teams)):
+        for index, team in enumerate(home_teams):
             home = homepage.league_group_container.match_containers[index].home
             home.click(button="right")
             page.screenshot(path=f"img_{index}.png", full_page=True)
