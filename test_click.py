@@ -36,10 +36,14 @@ def test_main():
         homepage = page.query_elements(SPORTS_PAGE)
         home_teams = homepage.league_group_container.match_containers
         #get_response(page)
+        start_time = time.perf_counter()
         for index, team in enumerate(home_teams):
             team = homepage.league_group_container.match_containers[index].home
             team.click(button="right")
             page.screenshot(path=f"img_{index}.png", full_page=True)
             time.sleep(2)
+        end_time = time.perf_counter()
         browser.close()
     display.stop
+    
+    print(f"for loop executed in {end_time - start_time:.2f} seconds")
