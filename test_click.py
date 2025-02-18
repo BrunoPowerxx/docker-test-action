@@ -39,8 +39,8 @@ def test_main():
         #get_response(page)
         start_time = time.perf_counter()
         supa_links = []
-        for index, team in enumerate(home_teams):
-            team.click()
+        for index in range(len(home_teams)):
+            home_teams[index].home.click()
             page.wait_for_load_state("networkidle")
 # Store the new page object and URL
             link = page.url
