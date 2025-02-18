@@ -38,12 +38,26 @@ def test_main():
         home_teams = homepage.league_group_container.match_containers
         #get_response(page)
         start_time = time.perf_counter()
+        supa_links = []
         for index, team in enumerate(home_teams):
-            team = homepage.league_group_container.match_containers[index].home
-            team.click(button="right")
-            page.screenshot(path=f"/app/shots/img_{index}.png", full_page=True)
-            time.sleep(2)
+            #new_page = browser.new_page()  # Open a new tab
+            page.wait_for_load_state("networkidle")
+            team.click()
+            page.wait_for_load_state("networkidle")
+# Store the new page object and URL
+            link = page.url
+
+            new_page.screenshot(path=f"/app/shots/img_{index}.png", full_page=True)
+            supa_links.append(link)
+            #new_page.close()
+
+#time.sleep(2)
+
         end_time = time.perf_counter()
-        browser.close()
+        for index, link in enumerate(supa_links):
+            print(f"Page {index}: {link}")
+
+            
+       browser.close()
     display.stop
     print(f"for loop executed in {end_time - start_time:.2f} seconds")
