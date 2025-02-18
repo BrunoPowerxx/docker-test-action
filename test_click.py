@@ -41,6 +41,7 @@ def test_main():
         supa_links = []
         for index, team in enumerate(home_teams):
             team[index].click()
+            page.wait_for_load_state("networkidle")
 # Store the new page object and URL
             link = page.url
 
