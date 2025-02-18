@@ -29,6 +29,17 @@ jobs:
         name: network-requests-log
         path: ./network_requests.json
 
+    - name: Copy Screenshots from Container
+      run: |
+        docker cp test-bookies-container:/app/before.png ./before.png
+        docker cp test-bookies-container:/app/img_*.png ./img_*.png
+
+    - name: Save Screenshots as Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: screenshots
+        path: ./*.png
+
     - name: Clean up
       run: |
         docker rm test-bookies-container
