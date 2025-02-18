@@ -22,7 +22,7 @@ jobs:
     - name: Copy Screenshots from Container
       run: |
         docker cp test-bookies-container:/app/before.png ./before.png
-        docker cp test-bookies-container:/app/img_*.png ./img_*.png
+        docker cp test-bookies-container:/app/*.png ./*.png
 
     - name: Save Screenshots as Artifacts
       uses: actions/upload-artifact@v4
