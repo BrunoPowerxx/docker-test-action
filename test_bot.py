@@ -1,11 +1,11 @@
 from playwright.sync_api import sync_playwright
 from pyvirtualdisplay import Display
+from time import perf_counter
 import concurrent.futures
 import pandas as pd
 import agentql
 import random
 import pytest
-import time
 import json
 
 SPORTS_PAGE = """
@@ -18,20 +18,15 @@ SPORTS_PAGE = """
     }
   }
 }        """
-URL = "https.supabets.co.za"
-
+URL = "https://www.supabets.co.za"
 
 def click_game(game):
-    """Opens a new page, clicks the game, and stores the resulting URL."""
-    with sync_playwright() as p, p.chromium.launch(headless=False) as subbrowser:        # Create a new page in the browser and wrap it to get access to the AgentQL's querying API
-        subpage = agentql.wrap(subbrowser.new_page())
-        subpage.goto(URL, wait_until="networkidle")
         game.click()
         result_url = subpage.url  # Extract the navigated URL
-        results.append(result_url)
-        browser.close()
+        subbrowser.close()
         
-        return results
+        return result_url
+
 def test_supah():
     display = Display(visible=False, size=(1920, 1080))
     display.start()
@@ -43,9 +38,8 @@ def test_supah():
 
         page.goto(URL, wait_until="networkidle")
         homepage = page.query_elements(SPORTS_PAGE)
-        home_locator = homepage.league_group_container.match_containers.home
-        games = home_locator.query_selector_all()
-        results = []
+        games_count = len(homepage.league_group_container.match_containers)
+        games = [homepage.league_group_container.match_containers[i].home for i in range(games_count)]
         start_time = time.perf_counter()
         #Click each game link in a separate browser instance
         with concurrent.futures.ThreadPoolExecutor() as executor:
