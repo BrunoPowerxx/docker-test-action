@@ -39,9 +39,11 @@ def test_supabets():
         homepage = page.query_elements(SPORTS_PAGE)
         links = []
         game = homepage.league_container.match_containers[0].home
+        page.screenshot(path="before.png", full_page=True)
         game.click()
         page.wait_for_load_state("load")
         print("After click:", page.url)
         page.wait_for_load_state("load")
+        page.screenshot(path="after.png", full_page=True)
 
     display.stop()
