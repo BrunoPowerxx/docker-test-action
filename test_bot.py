@@ -37,7 +37,7 @@ def test_supabets():
         homepage = page.query_elements(SPORTS_PAGE)
         games_cont = homepage.league_container.match_containers
         links = []
-        for index in range(len(games_count)):
+        for index in range(len(games_cont)):
             print("Before click:", page.url)
             game = homepage.league_container.match_containers[index].home
             home.click()
