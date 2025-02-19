@@ -43,7 +43,7 @@ def test_supabets():
             link = page.url
             links.append(link)
             page.go_back()
-            page.wait_for_load_state("networkidle")
+            time.sleep(3)
         for link in links:
             
             print("Collected URL:", link)
