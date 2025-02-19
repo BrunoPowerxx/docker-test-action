@@ -39,8 +39,10 @@ def test_supabets():
         games = [homepage.league_container.match_containers[i].home for i in range(len(games_cont))]
         links = []
         for game in games:
+            print("Before click:", page.url)
             game.click()
             time.sleep(3)
+            print("After click:", page.url)
             link = page.url
             links.append(link)
             page.go_back()
