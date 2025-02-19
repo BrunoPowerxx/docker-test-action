@@ -9,13 +9,21 @@ import pytest
 import json
 import time
 
+{   
+    cookies_form {
+        reject_btn
+    }
+}
+"""
+
 SPORTS_PAGE = """ 
-{  league_container {
-    match_containers[] {
-      league
-      home
-      away
-      day
+{
+   league_container {
+       match_containers[] {
+           league
+           home
+           away
+           day
     }
   }
 }        """
