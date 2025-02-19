@@ -33,7 +33,7 @@ def test_supabets():
         page = agentql.wrap(context.new_page())
 
         page.goto(URL)
-        time.sleep(3)
+        page.wait_for_load_state("load")
         homepage = page.query_elements(SPORTS_PAGE)
         games_cont = homepage.league_container.match_containers
         games = [homepage.league_container.match_containers[i].home for i in range(len(games_cont))]
@@ -41,12 +41,12 @@ def test_supabets():
         for game in games:
             print("Before click:", page.url)
             game.click()
-            time.sleep(3)
+            page.wait_for_load_state("load")
             print("After click:", page.url)
             link = page.url
             links.append(link)
             page.go_back()
-            time.sleep(3)
+            page.wait_for_load_state("load")
         for link in links:
             
             print("Collected URL:", link)
