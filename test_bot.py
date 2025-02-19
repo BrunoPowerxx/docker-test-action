@@ -40,7 +40,7 @@ def test_supabets():
         for index in range(len(games_cont)):
             print("Before click:", page.url)
             game = homepage.league_container.match_containers[index].home
-            home.click()
+            game.click()
             page.wait_for_load_state("load")
             print("After click:", page.url)
             link = page.url
