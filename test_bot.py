@@ -26,7 +26,7 @@ def test_supabets():
     display = Display(visible=False, size=(1920, 1080))
     display.start()
 
-    with async_playwright() as p:
+    with sync_playwright() as p:
         
         browser = p.chromium.launch(headless=False)
         context = browser.new_context()
