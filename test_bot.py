@@ -40,8 +40,8 @@ def test_supah():
 
         page.goto(URL, wait_until="networkidle")
         homepage = page.query_elements(SPORTS_PAGE)
-        games_count = len(homepage.league_group_container.match_containers)
-        games = [homepage.league_group_container.match_containers[i].home for i in range(games_count)]
+        games_cont = homepage.league_container.match_containers
+        games = [homepage.league_container.match_containers[i].home for i in range(len(games_cont))]
 
         context_2 = browser.new_context()
         start_time = time.perf_counter()
