@@ -9,12 +9,6 @@ import pytest
 import json
 import time
 
-{   
-    cookies_form {
-        reject_btn
-    }
-}
-"""
 
 SPORTS_PAGE = """ 
 {
@@ -24,8 +18,8 @@ SPORTS_PAGE = """
            home
            away
            day
-    }
-  }
+       }
+   }
 }        """
 URL = "https://www.supabets.co.za"
 
