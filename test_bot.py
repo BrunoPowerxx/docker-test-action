@@ -32,14 +32,15 @@ def test_supabets():
         context = browser.new_context()
         page = agentql.wrap(context.new_page())
 
-        page.goto(URL, wait_until="networkidle")
+        page.goto(URL)
+        time.sleep(3)
         homepage = page.query_elements(SPORTS_PAGE)
         games_cont = homepage.league_container.match_containers
         games = [homepage.league_container.match_containers[i].home for i in range(len(games_cont))]
         links = []
         for game in games:
             game.click()
-            page.wait_for_load_state("networkidle")
+            time.sleep(3)
             link = page.url
             links.append(link)
             page.go_back()
