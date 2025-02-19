@@ -1,6 +1,6 @@
 from playwright.sync_api import sync_playwright
 from pyvirtualdisplay import Display
-import concurrent.futues
+import concurrent.futures
 import pandas as pd
 import agentql
 import random
