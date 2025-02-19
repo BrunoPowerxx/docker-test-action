@@ -21,21 +21,13 @@ SPORTS_PAGE = """
 }        """
 URL = "https://www.supabets.co.za"
 
- def test_click(game, browser):
-        context_2 = browser.new_context()
-        subpage = agentql.wrap(context_2.new_page())
-        subpage.goto(URL, wait_until="networkidle")
-        game.click()
-        result_url = subpage.url
-        subpage.close()
-        
-        return result_url
 
-async def supabets_urls():
+def test_supabets():
     display = Display(visible=False, size=(1920, 1080))
     display.start()
 
-    with async_playwright() as p:
+    with playwright() as p:
+        
         browser = p.chromium.launch(headless=False)
         context = browser.new_context()
         page = agentql.wrap(context.new_page())
@@ -47,9 +39,11 @@ async def supabets_urls():
         links = []
         for game in games:
             game.click()
+            page.wait_for_load_state("networkidle")
             link = page.url
             links.append(link)
             page.go_back()
+            page.wait_for_load_state("networkidle")
         for link in links:
             
             print("Collected URL:", link)
