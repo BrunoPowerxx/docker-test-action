@@ -20,11 +20,12 @@ SPORTS_PAGE = """
 }        """
 URL = "https://www.supabets.co.za"
 
-def click_game(game, subpage):
-        
+def click_game(game, context_2):
+        subpage = agentql.wrap(context_2.new_page())
+        subpage.goto(URL, wait_until="networkidle")
         game.click()
         result_url = subpage.url  # Extract the navigated URL
-        subbrowser.close()
+        subpage.close()
         
         return result_url
 
@@ -43,13 +44,10 @@ def test_supah():
         games = [homepage.league_group_container.match_containers[i].home for i in range(games_count)]
 
         context_2 = browser.new_context()
-        page_two = agentql.wrap(context_2.new_page())
-        subpage = page_two.goto(URL, wait_until="networkidle")
-
         start_time = time.perf_counter()
         
         with concurrent.futures.ThreadPoolExecutor() as executor:
-            results = list(executor.map(lambda game: click_game(game, subpage), games))
+            results = list(executor.map(lambda game: click_game(game, context_2), games))
 
         end_time = perf_counter()
         for result in results:
