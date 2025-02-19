@@ -40,6 +40,11 @@ def test_supah():
         homepage = page.query_elements(SPORTS_PAGE)
         games_count = len(homepage.league_group_container.match_containers)
         games = [homepage.league_group_container.match_containers[i].home for i in range(games_count)]
+
+        context_2 = browser.new_context()
+        page_two = agentql.wrap(context_2.new_page())
+        subpage = page_two.goto(URL)
+
         start_time = time.perf_counter()
         #Click each game link in a separate browser instance
         with concurrent.futures.ThreadPoolExecutor() as executor:
