@@ -26,7 +26,7 @@ async def click_game(game, browser):
         context_2 = await browser.new_context()
         subpage = agentql.wrap(await context_2.new_page())
         await subpage.goto(URL, wait_until="networkidle")
-        game.click()
+        await game.click()
         result_url = subpage.url  # Extract the navigated URL
         await subpage.close()
         
@@ -47,22 +47,22 @@ async def supabets_urls():
         games = [homepage.league_container.match_containers[i].home for i in range(len(games_cont))]
 
         #context_2 = browser.new_context()
-        start_time = time.perf_counter()
+        #start_time = time.perf_counter()
 
-        tasks = [click_game_async(game, browser) for game in games]
+        tasks = [click_game(game, browser) for game in games]
         results = await asyncio.gather(*tasks)
  
         
         #with concurrent.futures.ThreadPoolExecutor() as executor:
             #results = list(executor.map(lambda game: click_game(game, context_2), games))
 
-        end_time = perf_counter()
+        #end_time = perf_counter()
         for result in results:
             
             print("Collected URL:", result)
-        print(f"loop took {end_time - start_time}")
+        #print(f"loop took {end_time - start_time}")
 
     display.stop()
 
 def test_links():
-    asyncio.run(supabets_links())
+    asyncio.run(supabets_urls())
