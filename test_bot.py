@@ -12,7 +12,7 @@ import time
 
 SPORTS_PAGE = """ 
 {
-   league_container {
+   league_group_container {
        match_containers[] {
            league
            home
@@ -38,7 +38,7 @@ def test_supabets():
         page.wait_for_load_state("load")
         homepage = page.query_elements(SPORTS_PAGE)
         links = []
-        game = homepage.league_container.match_containers[0].home
+        game = homepage.league_group_container.match_containers[0].home
         page.screenshot(path="before.png", full_page=True)
         game.click()
         page.wait_for_load_state("load")
