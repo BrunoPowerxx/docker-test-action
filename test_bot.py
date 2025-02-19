@@ -63,3 +63,6 @@ async def supabets_urls():
         print(f"loop took {end_time - start_time}")
 
     display.stop()
+
+def test_links():
+    asyncio.run(supabets_links())
