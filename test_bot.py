@@ -45,21 +45,15 @@ async def supabets_urls():
         homepage = await  page.query_elements(SPORTS_PAGE)
         games_cont = homepage.league_container.match_containers
         games = [homepage.league_container.match_containers[i].home for i in range(len(games_cont))]
-
-        #context_2 = browser.new_context()
-        #start_time = time.perf_counter()
-
-        tasks = [click_game(game, browser) for game in games]
-        results = await asyncio.gather(*tasks)
- 
-        
-        #with concurrent.futures.ThreadPoolExecutor() as executor:
-            #results = list(executor.map(lambda game: click_game(game, context_2), games))
-
-        #end_time = perf_counter()
-        for result in results:
+        links = []
+        for game in games:
+            await game.click()
+            link = page.url
+            links.append(link)
+            page.go_back()
+        for link in links:
             
-            print("Collected URL:", result)
+            print("Collected URL:", link)
         #print(f"loop took {end_time - start_time}")
 
     display.stop()
