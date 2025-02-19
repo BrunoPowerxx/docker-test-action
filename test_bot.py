@@ -9,7 +9,7 @@ import pytest
 import json
 import time
 
-SPORTS_PAGE = """
+SPORTS_PAGE = """ 
 {  league_container {
     match_containers[] {
       league
