@@ -54,6 +54,6 @@ def test_supah():
         for result in results:
             
             print("Collected URL:", result)
-        print(f"loop took {end_time - start_time})
+        print(f"loop took {end_time - start_time}")
 
     display.stop()
