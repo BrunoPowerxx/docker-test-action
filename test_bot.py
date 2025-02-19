@@ -1,4 +1,4 @@
-from playwright.async_api import async_playwright
+from playwright.sync_api import sync_playwright
 from pyvirtualdisplay import Display
 from time import perf_counter
 import concurrent.futures
@@ -26,7 +26,7 @@ def test_supabets():
     display = Display(visible=False, size=(1920, 1080))
     display.start()
 
-    with playwright() as p:
+    with async_playwright() as p:
         
         browser = p.chromium.launch(headless=False)
         context = browser.new_context()
