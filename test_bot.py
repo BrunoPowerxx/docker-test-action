@@ -7,6 +7,7 @@ import agentql
 import random
 import pytest
 import json
+import time
 
 SPORTS_PAGE = """
 {  league_container {
