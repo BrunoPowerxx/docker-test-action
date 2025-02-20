@@ -9,8 +9,10 @@ import pytest
 import json
 import time
 
-'''
-SPORTS_PAGE = """ 
+URL = "https://www.supabets.co.za"
+
+def test_supabets():
+    SPORTS_PAGE = """ 
 {
    league_group_container {
        match_containers[] {
@@ -21,10 +23,6 @@ SPORTS_PAGE = """
        }
    }
 }        """
-URL = "https://www.supabets.co.za"
-
-
-def test_supabets():
     display = Display(visible=False, size=(1920, 1080))
     display.start()
 
@@ -38,23 +36,20 @@ def test_supabets():
         page.wait_for_load_state("load")
         page.screenshot(path="before.png", full_page=True)
         homepage = page.query_elements(SPORTS_PAGE)
-        links = []
-        more_markets = page.locator("div.more-markets a").first
-        # Get the href attribute
-        link = more_markets.get_attribute("href")
-        if link:
-            print("Extracted link:", link)
-        if more_markets:
-            more_markets.click()
+        
+        home_loc = homepage.league_group_container.match_containers[0].home
+        if home_loc:
+            home_class = home_loc.get_attribute("class")
+            home_loc.click()
+            page.wait_for_load_state("load")
             print("After click:", page.url)
             page.screenshot(path="after.png", full_page=True)
 
         #game = homepage.league_group_container.match_containers[0].home
         #game.click()
-        page.wait_for_load_state("load")
-
-    display.stop()'''
-
+        browser.close
+    display.stop()
+'''
 from pyvirtualdisplay import Display
 import json
 import time
@@ -79,6 +74,7 @@ def test_main():
         # Navigate to the desired URL
         page.goto(URL)
         time.sleep(5)
+        page.screenshot(path="before.png", full_page=True)
         get_response(page)
         time.sleep(5)
         browser.close()
@@ -193,4 +189,4 @@ def get_response(page: Page):
             #print(event)
         time.sleep(1)
         page.go_back()
-        time.sleep(3) 
+        time.sleep(3)'''
