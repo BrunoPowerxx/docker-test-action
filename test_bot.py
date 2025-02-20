@@ -168,7 +168,7 @@ def get_response(page: Page):
   }
 }"""
 
-    page.screenshot(path="before.png", full_page=True)
+    page.screenshot(path="app/shots/before.png", full_page=True)
     time.sleep(1)
     homepage = page.query_elements(SPORTS_PAGE)
     matches = []
@@ -179,7 +179,7 @@ def get_response(page: Page):
         home_locator = homepage.league_group_container.match_containers[index].home
         home_class = home_locator.get_attribute("class")  # Get class attribute if needed
         home_locator.click()
-        page.screenshot(path=f"supa_{index}.png", full_page=True)
+        page.screenshot(path=f"/app/shots/supa_{index}.png", full_page=True)
 
         event = page.query_data(ODDS_PAGE)
         #ties = elements.league_group_container.league_containers.home[0:5]
