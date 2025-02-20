@@ -10,7 +10,7 @@ import json
 import time
 
 URL = "https://www.supabets.co.za"
-
+'''
 def test_supabets():
     SPORTS_PAGE = """ 
 {
@@ -50,6 +50,7 @@ def test_supabets():
         browser.close
     display.stop()
 '''
+
 from pyvirtualdisplay import Display
 import json
 import time
@@ -167,7 +168,7 @@ def get_response(page: Page):
   }
 }"""
 
-    #page.screenshot(path="hwb.png", full_page=True)
+    page.screenshot(path="before.png", full_page=True)
     time.sleep(1)
     homepage = page.query_elements(SPORTS_PAGE)
     matches = []
@@ -178,15 +179,15 @@ def get_response(page: Page):
         home_locator = homepage.league_group_container.match_containers[index].home
         home_class = home_locator.get_attribute("class")  # Get class attribute if needed
         home_locator.click()
-        #page.screenshot(path=f"swb_{index}.png", full_page=True)
+        page.screenshot(path=f"supa_{index}.png", full_page=True)
 
         event = page.query_data(ODDS_PAGE)
         #ties = elements.league_group_container.league_containers.home[0:5]
-
+        
         if event:  # Ensure event data is not empty
 
             print(event)
-            #print(event)
+            print(page.url)
         time.sleep(1)
         page.go_back()
-        time.sleep(3)'''
+        time.sleep(3)
