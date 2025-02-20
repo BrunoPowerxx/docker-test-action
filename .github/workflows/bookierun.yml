@@ -21,14 +21,14 @@ jobs:
 
     - name: Copy screenshots from container
       run: |
-        docker cp test-bookies-container:/app/before.png ./before.png
-        docker cp test-bookies-container:/app/after.png ./after.png
+        docker cp test-bookies-container:/app/shots ./shots
+        docker cp test-bookies-container:/app/shots ./shots
 
     - name: Save screenshots as artifacts
       uses: actions/upload-artifact@v4
       with:
         name: screenshots
-        path: ./*.png
+        path: ./shots
 
     - name: Clean up
       run: |
