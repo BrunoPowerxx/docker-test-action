@@ -47,10 +47,10 @@ def test_supabets():
         if more_markets:
             more_markets.click()
             print("After click:", page.url)
+            page.screenshot(path="after.png", full_page=True)
 
         #game = homepage.league_group_container.match_containers[0].home
         #game.click()
         page.wait_for_load_state("load")
-        page.screenshot(path="after.png", full_page=True)
 
     display.stop()
