@@ -75,7 +75,7 @@ def test_main():
         # Navigate to the desired URL
         page.goto(URL)
         time.sleep(5)
-        page.screenshot(path="before.png", full_page=True)
+        page.screenshot(path="/app/shots/before.png", full_page=True)
         get_response(page)
         time.sleep(5)
         browser.close()
