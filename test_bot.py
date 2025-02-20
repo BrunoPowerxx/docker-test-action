@@ -36,13 +36,20 @@ def test_supabets():
 
         page.goto(URL)
         page.wait_for_load_state("load")
+        page.screenshot(path="before.png", full_page=True)
         homepage = page.query_elements(SPORTS_PAGE)
         links = []
-        game = homepage.league_group_container.match_containers[0].home
-        page.screenshot(path="before.png", full_page=True)
-        game.click()
-        page.wait_for_load_state("load")
-        print("After click:", page.url)
+        more_markets = page.locator("div.more-markets a").first
+        # Get the href attribute
+        link = more_markets.get_attribute("href")
+        if link:
+            print("Extracted link:", link)
+        if more_markets:
+            more_markets.click()
+            print("After click:", page.url)
+
+        #game = homepage.league_group_container.match_containers[0].home
+        #game.click()
         page.wait_for_load_state("load")
         page.screenshot(path="after.png", full_page=True)
 
