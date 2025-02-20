@@ -9,7 +9,7 @@ import pytest
 import json
 import time
 
-
+'''
 SPORTS_PAGE = """ 
 {
    league_group_container {
@@ -53,4 +53,144 @@ def test_supabets():
         #game.click()
         page.wait_for_load_state("load")
 
-    display.stop()
+    display.stop()'''
+
+from pyvirtualdisplay import Display
+import json
+import time
+import pandas as pd
+import agentql
+from agentql.ext.playwright.sync_api import Page
+from playwright.sync_api import sync_playwright
+import pytest
+# Set up logging
+
+# Set the URL to the desired website
+URL = "https://www.supabets.co.za/"
+
+
+def test_main():
+    display = Display(visible=False, size=(1920, 1080))
+    display.start()
+    with sync_playwright() as p, p.chromium.launch(headless=False) as browser:
+        # Create a new page in the browser and wrap it to get access to the AgentQL's querying API
+        page = agentql.wrap(browser.new_page())
+
+        # Navigate to the desired URL
+        page.goto(URL)
+        time.sleep(5)
+        get_response(page)
+        time.sleep(5)
+        browser.close()
+    display.stop
+
+def get_response(page: Page):
+
+    SPORTS_PAGE = """
+{
+  league_group_container {
+    match_containers[] {
+      league
+      home
+      away
+      day
+    }
+  }
+}
+    """
+    ODDS_PAGE = """
+{
+  subevent_details {
+    match_tracker {
+      home_v_away
+      day
+      time
+    }
+    list_cgq {
+      all
+      popular
+    }
+    subevent_panel {
+      head_to_head(1x2) {
+        market_type
+        home {
+          odd_type
+          odd_value
+        }
+        draw {
+          odd_type
+          odd_value
+        }
+        away {
+          odd_type
+          odd_value
+        }
+      }
+      first_goal("1st goal", odds values) {
+        market_type
+        None {
+          odd_type
+          odd_value
+        }
+        home {
+          odd_type
+          odd_value
+        }
+        away {
+          odd_type
+          odd_value
+        }
+      }
+      first_half_first_goal {
+        market_type
+        None {
+          odd_type
+          odd_value
+        }
+        home {
+          odd_type
+          odd_value
+        }
+        away {
+          odd_type
+          odd_value
+        }
+      }
+      first_half_away_over_under(0.5, odds vales) {
+        market_type
+        over {
+          odd_type
+          odd_value
+        }
+        under {
+          odd_type
+          odd_value
+        }
+      }
+    }
+  }
+}"""
+
+    #page.screenshot(path="hwb.png", full_page=True)
+    time.sleep(1)
+    homepage = page.query_elements(SPORTS_PAGE)
+    matches = []
+    #print(homepage)
+    match_cont = len(homepage.league_group_container.match_containers)
+    #counter = 0
+    for index in range(match_cont):
+        home_locator = homepage.league_group_container.match_containers[index].home
+        home_class = home_locator.get_attribute("class")  # Get class attribute if needed
+        home_locator.click()
+        #page.screenshot(path=f"swb_{index}.png", full_page=True)
+
+        event = page.query_data(ODDS_PAGE)
+        #ties = elements.league_group_container.league_containers.home[0:5]
+
+        if event:  # Ensure event data is not empty
+
+            print(event)
+            #print(event)
+        time.sleep(1)
+        page.go_back()
+        time.sleep(3) 
