@@ -167,6 +167,18 @@ def get_response(page: Page):
     }
   }
 }"""
+    ODDS = """
+{
+  page_url
+  team_names(home v away)
+  markets[] {
+      market_name
+      odd_type
+      odd_value(decimal) 
+      implied_probability(reciprocal of odds_value rounded to 2 decimal places)
+  }
+}
+    """
 
     page.screenshot(path="app/shots/before.png", full_page=True)
     time.sleep(1)
@@ -181,7 +193,7 @@ def get_response(page: Page):
         home_locator.click()
         page.screenshot(path=f"/app/shots/supa_{index}.png", full_page=True)
 
-        event = page.query_data(ODDS_PAGE)
+        event = page.query_data(ODDS)
         #ties = elements.league_group_container.league_containers.home[0:5]
         
         if event:  # Ensure event data is not empty
