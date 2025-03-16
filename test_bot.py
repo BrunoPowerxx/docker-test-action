@@ -1,20 +1,29 @@
-from pyvirtualdisplay import Display
-import json
-import time
-import pandas as pd
-import agentql
+from concurrent.futures import ThreadPoolExecutor
 from agentql.ext.playwright.sync_api import Page
 from playwright.sync_api import sync_playwright
-import pytest
+from pyvirtualdisplay import Display
+import pandas as pd
+import agentql
+import random
+import json
+import time
+
 # Set up logging
 
 # Set the URL to the desired website
-urls = [
+
+def test_main():
+    urls = [
     "https://www.betway.co.za/sport",
     "https://www.supabets.co.za/",
     # Add more URLs as needed
-]
-
+    ]
+    with ThreadPoolExecutor() as executor:
+        # Map the scrape_data function to the list of URLs
+        results = list(executor.map(scraper, urls))
+        with open('match_data.json', 'w') as json_file:
+        json.dump(results, json_file, indent=4)
+  
 def scraper(url):
     display = Display(visible=False, size=(1920, 1080))
     display.start()
@@ -80,6 +89,4 @@ def get_response(page: Page):
         page.go_back()
         time.sleep(2)
     # Save data to a JSON file
-    with open('match_data.json', 'w') as json_file:
-        json.dump(matches, json_file, indent=4)
-  
+    
