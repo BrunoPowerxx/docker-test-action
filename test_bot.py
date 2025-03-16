@@ -47,8 +47,10 @@ def get_response(page: Page):
   league_group_container {
     match_containers[] {
       league
-      home_v_away
+      home
+      away
       day
+      more
     }
   }
 }
