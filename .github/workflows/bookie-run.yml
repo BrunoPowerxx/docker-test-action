@@ -1,4 +1,4 @@
-name: pull test ease
+name: pull test bookie
 
 on: [workflow_dispatch]
 #
