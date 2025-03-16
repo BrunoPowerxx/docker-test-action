@@ -22,13 +22,12 @@ jobs:
     - name: Copy screenshots from container
       run: |
         docker cp test-bookies-container:/app/shots ./shots
-        docker cp test-bookies-container:/app/shots ./shots
 
-    - name: Save screenshots as artifacts
+    - name: upload match data
       uses: actions/upload-artifact@v4
       with:
         name: screenshots
-        path: ./shots
+        path: match_data.json
 
     - name: Clean up
       run: |
