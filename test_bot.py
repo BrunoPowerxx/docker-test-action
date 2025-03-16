@@ -63,7 +63,7 @@ def get_response(page: Page):
     match_cont = len(homepage.league_group_container.match_containers)
     #counter = 0
     for index in range(match_cont):
-        home_locator = homepage.league_group_container.match_containers[index].home
+        home_locator = homepage.league_group_container.match_containers[index].home_v_away
         home_class = home_locator.get_attribute("class")  # Get class attribute if needed
         home_locator.click()
         #page.screenshot(path=f"/app/shots/supa_{index}.png", full_page=True)
