@@ -1,4 +1,4 @@
-name: pull test bookie
+name: run test bookie
 
 on: [workflow_dispatch]
 #
@@ -35,7 +35,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: screenshots
-        path:./shots
+        path: ./shots
 
     - name: Clean up
       run: |
