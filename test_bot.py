@@ -75,7 +75,7 @@ def get_response(page: Page):
     #homepage = page.query_elements(SPORTS_PAGE)
     #matches = []
     #print(homepage)
-    match_cont = len(homepage.league_group_container.match_containers)
+    #match_cont = len(homepage.league_group_container.match_containers)
     #counter = 0
 '''   for index in range(match_cont):
         home_locator = homepage.league_group_container.match_containers[index].more
