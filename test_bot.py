@@ -78,6 +78,6 @@ def get_response(page: Page):
         page.go_back()
         time.sleep(3)
     # Save data to a JSON file
-    with open('matches_data.json', 'w') as json_file:
+    with open('match_data.json', 'w') as json_file:
         json.dump(matches, json_file, indent=4)
   
