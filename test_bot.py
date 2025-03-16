@@ -35,9 +35,19 @@ def scraper(url):
         page.goto(url)
         time.sleep(3)
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        filename = f"screenshot_{timestamp}.png"
+        filename = f"first_{timestamp}.png"
         page.screenshot(path=f"/app/shots/{filename}", full_page=True)
-        get_response(page)
+        try:
+            close_button = page.query_selector("css=selector-for-close-button")
+            if close_button:
+                close_button.click()
+                time.sleep(1)  # Wait for the popup to close
+        except Exception as e:
+            print(f"Error closing popup on {url}: {e}")
+        time.sleep(1)
+        filename = f"second_{timestamp}.png"
+        page.screenshot(path=f"/app/shots/{filename}", full_page=True)
+        #get_response(page)
         time.sleep(1)
         browser.close()
     display.stop
