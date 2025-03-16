@@ -14,8 +14,7 @@ import time
 
 def test_main():
     urls = [
-    "https://www.supabets.co.za/",
-    #"https://www.betway.co.za/sport",
+    "https://www.supabets.co.za/"
     ]
     with ThreadPoolExecutor() as executor:
         # Map the scrape_data function to the list of URLs
