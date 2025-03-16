@@ -24,13 +24,13 @@ jobs:
         #docker cp test-bookies-container:/app/match_data.json ./match_data.json
 
         docker cp test-bookies-container:/app/shots ./shots
-'''
-    - name: upload match data
-      uses: actions/upload-artifact@v4
-      with:
-        name: match-data
-        path: match_data.json
-'''
+
+#    - name: upload match data
+#      uses: actions/upload-artifact@v4
+#      with:
+#        name: match-data
+#        path: match_data.json
+
     - name: upload screenshots
       uses: actions/upload-artifact@v4
       with:
