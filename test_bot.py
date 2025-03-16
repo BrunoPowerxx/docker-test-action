@@ -2,6 +2,7 @@ from concurrent.futures import ThreadPoolExecutor
 from agentql.ext.playwright.sync_api import Page
 from playwright.sync_api import sync_playwright
 from pyvirtualdisplay import Display
+from datetime import datetime 
 import pandas as pd
 import agentql
 import random
