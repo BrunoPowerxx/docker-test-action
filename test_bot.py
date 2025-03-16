@@ -18,6 +18,14 @@ def test_main():
     "https://www.supabets.co.za/",
     "https://www.betway.co.za/sport"
     ]
+    POPUP = """
+{
+    popup {
+        home_btn
+        close_btn
+    }
+}
+"""
     with ThreadPoolExecutor() as executor:
         # Map the scrape_data function to the list of URLs
         results = list(executor.map(scraper, urls))
@@ -38,9 +46,9 @@ def scraper(url):
         filename = f"first_{timestamp}.png"
         page.screenshot(path=f"/app/shots/{filename}", full_page=True)
         try:
-            close_button = page.query_selector("css=selector-for-close-button")
+            response = page.query_elements(POPUP)
             if close_button:
-                close_button.click()
+                response.popup.close_btn.click()
                 time.sleep(1)  # Wait for the popup to close
         except Exception as e:
             print(f"Error closing popup on {url}: {e}")
