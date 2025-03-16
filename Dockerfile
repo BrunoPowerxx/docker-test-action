@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM python:latest
 
 WORKDIR /app
 python -m pip install --upgrade pip
