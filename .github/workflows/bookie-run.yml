@@ -21,7 +21,7 @@ jobs:
 
     - name: Copy match data from container
       run: |
-        docker cp test-bookies-container:/app/match_data.json ./match_data.json
+        #docker cp test-bookies-container:/app/match_data.json ./match_data.json
 
         docker cp test-bookies-container:/app/shots ./shots
 '''
