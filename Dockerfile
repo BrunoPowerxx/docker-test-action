@@ -27,7 +27,7 @@ RUN apt-get update && apt-get install -y \
     libasound2 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-RUN mkdir -p /app/shots  
+
 COPY . .
 
 RUN chmod +x run.sh
