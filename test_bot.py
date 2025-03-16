@@ -56,7 +56,7 @@ def get_response(page: Page):
 }
     """
 
-    page.screenshot(path="app/shots/before.png", full_page=True)
+    #page.screenshot(path="app/shots/before.png", full_page=True)
     time.sleep(1)
     homepage = page.query_elements(SPORTS_PAGE)
     matches = []
