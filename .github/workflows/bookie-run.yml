@@ -19,14 +19,14 @@ jobs:
         mkdir -p logs
         docker run --name test-bookies-container -v ${{ runner.workspace }}/logs:/app/logs "${{ secrets.DOCKER_USER }}/test-bookies"
 
-    - name: Copy screenshots from container
+    - name: Copy match data from container
       run: |
-        docker cp test-bookies-container:/app/shots ./shots
+        docker cp test-bookies-container:/app/match_data.json ./match_data.json
 
     - name: upload match data
       uses: actions/upload-artifact@v4
       with:
-        name: screenshots
+        name: match data
         path: match_data.json
 
     - name: Clean up
