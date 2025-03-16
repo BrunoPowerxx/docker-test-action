@@ -72,11 +72,12 @@ def get_response(page: Page):
         event = page.query_data(ODDS_PAGE)
         #ties = elements.league_group_container.league_containers.home[0:5]
         
-        if event:  # Ensure event data is not empty
-                # Save data to a JSON file
-    with open('matches_data.json', 'w') as json_file:
-        json.dump(matches, json_file, indent=4)
- 
+        if event:
+            matches.append(event)
         time.sleep(1)
         page.go_back()
         time.sleep(3)
+    # Save data to a JSON file
+    with open('matches_data.json', 'w') as json_file:
+        json.dump(matches, json_file, indent=4)
+  
