@@ -9,8 +9,8 @@ import pytest
 # Set up logging
 
 # Set the URL to the desired website
-URL = "https://www.supabets.co.za/"
-
+#URL = "https://www.supabets.co.za/"
+URL = "https://www.betway.co.za/sport"
 
 def test_main():
     display = Display(visible=False, size=(1920, 1080))
@@ -22,7 +22,7 @@ def test_main():
         # Navigate to the desired URL
         page.goto(URL)
         time.sleep(5)
-        page.screenshot(path="/app/shots/before.png", full_page=True)
+        #page.screenshot(path="/app/shots/before.png", full_page=True)
         get_response(page)
         time.sleep(5)
         browser.close()
@@ -67,7 +67,7 @@ def get_response(page: Page):
         home_locator = homepage.league_group_container.match_containers[index].home
         home_class = home_locator.get_attribute("class")  # Get class attribute if needed
         home_locator.click()
-        page.screenshot(path=f"/app/shots/supa_{index}.png", full_page=True)
+        #page.screenshot(path=f"/app/shots/supa_{index}.png", full_page=True)
 
         event = page.query_data(ODDS_PAGE)
         #ties = elements.league_group_container.league_containers.home[0:5]
