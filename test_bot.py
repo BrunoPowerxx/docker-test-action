@@ -14,7 +14,8 @@ import time
 
 def test_main():
     urls = [
-    "https://www.supabets.co.za/"
+    "https://www.supabets.co.za/",
+    "https://www.betway.co.za/sport"
     ]
     with ThreadPoolExecutor() as executor:
         # Map the scrape_data function to the list of URLs
@@ -48,7 +49,6 @@ def get_response(page: Page):
       home
       away
       day
-      more
     }
   }
 }
@@ -67,17 +67,17 @@ def get_response(page: Page):
 }
     """
 
-    #page.screenshot(path="app/shots/before.png", full_page=True)
+    page.screenshot(path="app/shots/before.png", full_page=True)
     time.sleep(1)
-    homepage = page.query_elements(SPORTS_PAGE)
-    matches = []
+    #homepage = page.query_elements(SPORTS_PAGE)
+    #matches = []
     #print(homepage)
     match_cont = len(homepage.league_group_container.match_containers)
     #counter = 0
-    for index in range(match_cont):
+'''   for index in range(match_cont):
         home_locator = homepage.league_group_container.match_containers[index].more
         home_class = home_locator.get_attribute("class")  # Get class attribute if needed
-        home_locator.click()
+        #home_locator.click()
         #page.screenshot(path=f"/app/shots/supa_{index}.png", full_page=True)
 
         event = page.query_data(ODDS_PAGE)
@@ -89,4 +89,4 @@ def get_response(page: Page):
         page.go_back()
         time.sleep(2)
     # Save data to a JSON file
-    
+'''
