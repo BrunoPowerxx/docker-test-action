@@ -26,7 +26,7 @@ jobs:
     - name: upload match data
       uses: actions/upload-artifact@v4
       with:
-        name: match data
+        name: match-data
         path: match_data.json
 
     - name: Clean up
