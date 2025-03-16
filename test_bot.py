@@ -9,10 +9,13 @@ import pytest
 # Set up logging
 
 # Set the URL to the desired website
-#URL = "https://www.supabets.co.za/"
-URL = "https://www.betway.co.za/sport"
+urls = [
+    "https://www.betway.co.za/sport",
+    "https://www.supabets.co.za/",
+    # Add more URLs as needed
+]
 
-def test_main():
+def scraper(url):
     display = Display(visible=False, size=(1920, 1080))
     display.start()
     with sync_playwright() as p, p.chromium.launch(headless=False) as browser:
@@ -20,11 +23,11 @@ def test_main():
         page = agentql.wrap(browser.new_page())
 
         # Navigate to the desired URL
-        page.goto(URL)
-        time.sleep(5)
+        page.goto(url)
+        time.sleep(3)
         #page.screenshot(path="/app/shots/before.png", full_page=True)
         get_response(page)
-        time.sleep(5)
+        time.sleep(1)
         browser.close()
     display.stop
 
@@ -75,7 +78,7 @@ def get_response(page: Page):
             matches.append(event)
         time.sleep(1)
         page.go_back()
-        time.sleep(3)
+        time.sleep(2)
     # Save data to a JSON file
     with open('match_data.json', 'w') as json_file:
         json.dump(matches, json_file, indent=4)
