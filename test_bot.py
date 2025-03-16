@@ -33,7 +33,9 @@ def scraper(url):
         # Navigate to the desired URL
         page.goto(url)
         time.sleep(3)
-        #page.screenshot(path="/app/shots/before.png", full_page=True)
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        filename = f"screenshot_{timestamp}.png"
+        page.screenshot(path=f"/app/shots/{filename}", full_page=True)
         get_response(page)
         time.sleep(1)
         browser.close()
@@ -67,7 +69,7 @@ def get_response(page: Page):
 }
     """
 
-    page.screenshot(path="app/shots/before.png", full_page=True)
+    #page.screenshot(path="app/shots/before.png", full_page=True)
     time.sleep(1)
     #homepage = page.query_elements(SPORTS_PAGE)
     #matches = []
