@@ -22,7 +22,7 @@ def test_main():
         # Map the scrape_data function to the list of URLs
         results = list(executor.map(scraper, urls))
         with open('match_data.json', 'w') as json_file:
-        json.dump(results, json_file, indent=4)
+            json.dump(results, json_file, indent=4)
   
 def scraper(url):
     display = Display(visible=False, size=(1920, 1080))
