@@ -15,8 +15,7 @@ import time
 
 def test_main():
     urls = [
-    "https://www.supabets.co.za/",
-    "https://www.betway.co.za/sport"
+    "https://www.supabets.co.za/"
     ]
     POPUP = """
 {
@@ -42,9 +41,9 @@ def scraper(url):
         # Navigate to the desired URL
         page.goto(url)
         time.sleep(3)
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        filename = f"first_{timestamp}.png"
-        page.screenshot(path=f"/app/shots/{filename}", full_page=True)
+        #timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        #filename = f"first_{timestamp}.png"
+        #page.screenshot(path=f"/app/shots/{filename}", full_page=True)
         try:
             response = page.query_elements(POPUP)
             if close_button:
@@ -53,9 +52,9 @@ def scraper(url):
         except Exception as e:
             print(f"Error closing popup on {url}: {e}")
         time.sleep(1)
-        filename = f"second_{timestamp}.png"
-        page.screenshot(path=f"/app/shots/{filename}", full_page=True)
-        #get_response(page)
+        #filename = f"second_{timestamp}.png"
+        #page.screenshot(path=f"/app/shots/{filename}", full_page=True)
+        get_response(page)
         time.sleep(1)
         browser.close()
     display.stop
@@ -90,17 +89,17 @@ def get_response(page: Page):
 
     #page.screenshot(path="app/shots/before.png", full_page=True)
     time.sleep(1)
-    #homepage = page.query_elements(SPORTS_PAGE)
-    #matches = []
+    homepage = page.query_elements(SPORTS_PAGE)
+    matches = []
     #print(homepage)
-    #match_cont = len(homepage.league_group_container.match_containers)
+    match_cont = len(homepage.league_group_container.match_containers)
     #counter = 0
-'''   for index in range(match_cont):
-        home_locator = homepage.league_group_container.match_containers[index].more
+    for index in range(match_cont):
+        home_locator = homepage.league_group_container.match_containers[index].home
         home_class = home_locator.get_attribute("class")  # Get class attribute if needed
-        #home_locator.click()
+        home_locator.click()
         #page.screenshot(path=f"/app/shots/supa_{index}.png", full_page=True)
-
+        time.sleep(1)
         event = page.query_data(ODDS_PAGE)
         #ties = elements.league_group_container.league_containers.home[0:5]
         
@@ -110,4 +109,3 @@ def get_response(page: Page):
         page.go_back()
         time.sleep(2)
     # Save data to a JSON file
-'''
