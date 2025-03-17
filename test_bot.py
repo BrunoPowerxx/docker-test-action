@@ -29,6 +29,7 @@ def test_main():
         # Map the scrape_data function to the list of URLs
         results = list(executor.map(scraper, urls))
         with open('match_data.json', 'w') as json_file:
+            
             json.dump(results, json_file, indent=4)
   
 def scraper(url):
@@ -49,8 +50,8 @@ def scraper(url):
             if close_button:
                 response.popup.close_btn.click()
                 time.sleep(1)  # Wait for the popup to close
-        except Exception as e:
-            print(f"Error closing popup on {url}: {e}")
+        except:
+            pass
         time.sleep(1)
         #filename = f"second_{timestamp}.png"
         #page.screenshot(path=f"/app/shots/{filename}", full_page=True)
