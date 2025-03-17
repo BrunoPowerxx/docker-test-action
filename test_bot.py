@@ -82,8 +82,7 @@ def get_response(page: Page):
   markets[] {
       market_name
       odd_type
-      odd_value(decimal) 
-      implied_probability(reciprocal of odds_value rounded to 2 decimal places)
+      odd_value(decimal)
   }
 }
     """
