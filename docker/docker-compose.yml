@@ -1,0 +1,8 @@
+service_name:
+    build: . 
+    init: true
+    command: # command depending on a project
+    environment:
+      - DISPLAY=:0
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
