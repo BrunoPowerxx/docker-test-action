@@ -1,0 +1,41 @@
+name: Multi-Job Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  starter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Run starter job
+        run: |
+          echo "Starter job running on $(hostname)"
+
+  job-python:
+    needs: starter
+    runs-on: ubuntu-latest
+    container: python:3.9
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Run Python container job
+        run: |
+          echo "Python job running on $(hostname)"
+
+  job-node:
+    needs: starter
+    runs-on: ubuntu-latest
+    container: node:16
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Show Node environment
+        run: |
+          echo "Node job running on $(hostname)"
+          node --version
+          npm --version
