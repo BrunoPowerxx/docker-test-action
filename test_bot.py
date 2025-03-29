@@ -9,10 +9,6 @@ import random
 import json
 import time
 
-# Set up logging
-
-# Set the URL to the desired website
-
 def test_main():
     urls = [
     "https://www.supabets.co.za/"
@@ -26,7 +22,6 @@ def test_main():
 }
 """
     with ThreadPoolExecutor() as executor:
-        # Map the scrape_data function to the list of URLs
         results = list(executor.map(scraper, urls))
         with open('match_data.json', 'w') as json_file:
             
@@ -36,25 +31,17 @@ def scraper(url):
     display = Display(visible=False, size=(1920, 1080))
     display.start()
     with sync_playwright() as p, p.chromium.launch(headless=False) as browser:
-        # Create a new page in the browser and wrap it to get access to the AgentQL's querying API
         page = agentql.wrap(browser.new_page())
-
-        # Navigate to the desired URL
         page.goto(url)
         time.sleep(3)
-        #timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        #filename = f"first_{timestamp}.png"
-        #page.screenshot(path=f"/app/shots/{filename}", full_page=True)
         try:
             response = page.query_elements(POPUP)
             if close_button:
                 response.popup.close_btn.click()
-                time.sleep(1)  # Wait for the popup to close
+                time.sleep(1)
         except:
             pass
         time.sleep(1)
-        #filename = f"second_{timestamp}.png"
-        #page.screenshot(path=f"/app/shots/{filename}", full_page=True)
         get_response(page)
         time.sleep(1)
         browser.close()
@@ -86,22 +73,16 @@ def get_response(page: Page):
   }
 }
     """
-
-    #page.screenshot(path="app/shots/before.png", full_page=True)
     time.sleep(1)
     homepage = page.query_elements(SPORTS_PAGE)
     matches = []
-    #print(homepage)
     match_cont = len(homepage.league_group_container.match_containers)
-    #counter = 0
     for index in range(match_cont):
         home_locator = homepage.league_group_container.match_containers[index].home
         home_class = home_locator.get_attribute("class")  # Get class attribute if needed
-        home_locator.click()
-        #page.screenshot(path=f"/app/shots/supa_{index}.png", full_page=True)
+        home_locator.click() 
         time.sleep(1)
         event = page.query_data(ODDS_PAGE)
-        #ties = elements.league_group_container.league_containers.home[0:5]
         
         if event:
             matches.append(event)
