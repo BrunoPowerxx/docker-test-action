@@ -1,41 +1,96 @@
-name: Multi-Job Workflow
+name: Sample Workflow Matrix
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  starter:
+  # Step 1: Two parallel jobs running on an Alpine container
+  parallel-job-1:
     runs-on: ubuntu-latest
+    container: alpine:latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      
-      - name: Run starter job
-        run: |
-          echo "Starter job running on $(hostname)"
+      - name: Run a simple command in Alpine
+        run: echo "Running parallel job 1 on Alpine container"
 
-  job-python:
-    needs: starter
+  parallel-job-2:
     runs-on: ubuntu-latest
-    container: python:3.9
+    container: alpine:latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      
-      - name: Run Python container job
-        run: |
-          echo "Python job running on $(hostname)"
+      - name: Run a simple command in Alpine
+        run: echo "Running parallel job 2 on Alpine container"
 
-  job-node:
-    needs: starter
+  # Step 2: Matrix job with 10 containers, depends on the two parallel jobs
+  matrix-job-10-containers-1:
+    needs: [parallel-job-1, parallel-job-2]
     runs-on: ubuntu-latest
-    container: node:16
+    strategy:
+      matrix:
+        container:
+          - alpine:3.14
+          - alpine:3.15
+          - alpine:3.16
+          - ubuntu:20.04
+          - ubuntu:22.04
+          - debian:10
+          - debian:11
+          - node:16-alpine
+          - node:18-alpine
+          - python:3.9-alpine
+    container: ${{ matrix.container }}
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      
-      - name: Show Node environment
-        run: |
-          echo "Node job running on $(hostname)"
-          node --version
-          npm --version
+      - name: Run a command in the matrix container
+        run: echo "Running in ${{ matrix.container }}"
+
+  # Step 3: Another matrix job with 10 containers, depends on the first matrix job
+  matrix-job-10-containers-2:
+    needs: [matrix-job-10-containers-1]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        container:
+          - alpine:3.14
+          - alpine:3.15
+          - alpine:3.16
+          - ubuntu:20.04
+          - ubuntu:22.04
+          - debian:10
+          - debian:11
+          - node:16-alpine
+          - node:18-alpine
+          - python:3.9-alpine
+    container: ${{ matrix.container }}
+    steps:
+      - name: Run a command in the matrix container
+        run: echo "Running in ${{ matrix.container }} for the second matrix"
+
+  # Step 4: Matrix job with 2 containers, depends on the second matrix job
+  matrix-job-2-containers:
+    needs: [matrix-job-10-containers-2]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        container:
+          - alpine:3.16
+          - ubuntu:22.04
+    container: ${{ matrix.container }}
+    steps:
+      - name: Run a command in the matrix container
+        run: echo "Running in ${{ matrix.container }} for the smaller matrix"
+
+  # Step 5: Single job (matrix of 1 container), depends on the previous matrix job
+  final-job:
+    needs: [matrix-job-2-containers]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        container:
+          - alpine:3.16
+    container: ${{ matrix.container }}
+    steps:
+      - name: Run a final command
+        run: echo "Final job running in ${{ matrix.container }}"
