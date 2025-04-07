@@ -1,0 +1,17 @@
+name: Scrape Supabets
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    container:
+      image: ${{ secrets.DOCKER_USER }}/test-bookies:latest
+      volumes:
+        - ${{ runner.workspace }}:/app
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
