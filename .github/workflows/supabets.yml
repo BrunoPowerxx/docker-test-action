@@ -8,9 +8,9 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: ${{ secrets.DOCKER_USER }}/test-bookies:latest
+      image: dockhercontainer/test-bookies:latest
       volumes:
-        - ${{ runner.workspace }}:/app
+        - .:/app
 
     steps:
       - name: Checkout code
