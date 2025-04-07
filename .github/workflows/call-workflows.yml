@@ -1,0 +1,9 @@
+name: Call Workflows
+
+on: [workflow_dispatch]
+
+jobs:
+  call_scrape_supabets:
+    uses: ./.github/workflows/supabets.yml
+  call_scrape_supabets:
+    uses: ./.github/workflows/supabets.yml
