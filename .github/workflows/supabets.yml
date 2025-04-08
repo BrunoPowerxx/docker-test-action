@@ -24,7 +24,7 @@ jobs:
           ls -la /app
       - name: Copy dummy.txt to host system
         run: |
-          cp dummy.txt ./dummy.txt
+          cp -r /app/dummy.txt ./dummy.txt
       - name: Upload dummy.txt as artifact
         uses: actions/upload-artifact@v4
         with:
