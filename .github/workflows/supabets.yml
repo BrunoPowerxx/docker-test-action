@@ -22,9 +22,6 @@ jobs:
       - name: List files in /app
         run: |
           ls -la /app
-      - name: Copy dummy.txt to host system
-        run: |
-          docker cp test-bookies:/app/dummy.txt ./dummy.txt
 
       - name: Upload dummy.txt as artifact
         uses: actions/upload-artifact@v4
