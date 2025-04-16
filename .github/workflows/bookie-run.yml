@@ -21,7 +21,7 @@ jobs:
 
     - name: Copy match data from container
       run: |
-        docker cp test-bookies-container:/app/odds.csv ./odds.csv
+        docker cp test-bookies-container:/app/match_data.json ./match_data.json
 
         #docker cp test-bookies-container:/app/shots ./shots
 
@@ -29,7 +29,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: match-data
-        path: odds.csv
+        path: match_data.json
 
 #    - name: upload screenshots
 #      uses: actions/upload-artifact@v4
