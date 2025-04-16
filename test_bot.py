@@ -50,10 +50,10 @@ def scraper(url):
 
 def write_csv(matches):
     with open("odds.csv", "a", newline="") as File:
-            writer = csv.writer(File)
-            writer.writerow([matches])
+        writer = csv.writer(File)
+        writer.writerow([matches])
 
-        File.close()
+    File.close()
 
 def get_response(page: Page):
 
