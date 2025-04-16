@@ -93,4 +93,3 @@ def get_response(page: Page):
         page.go_back()
         time.sleep(2)
     return matches
-    # Save data to a JSON file
