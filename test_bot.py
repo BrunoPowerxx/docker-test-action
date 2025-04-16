@@ -44,8 +44,16 @@ def scraper(url):
         time.sleep(1)
         get_response(page)
         time.sleep(1)
+        write_csv(matches)
         browser.close()
     display.stop
+
+def write_csv(matches):
+    with open("odds.csv", "a", newline="") as File:
+            writer = csv.writer(File)
+            writer.writerow([matches])
+
+        File.close()
 
 def get_response(page: Page):
 
@@ -89,4 +97,5 @@ def get_response(page: Page):
         time.sleep(1)
         page.go_back()
         time.sleep(2)
+    return matches
     # Save data to a JSON file
