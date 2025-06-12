@@ -1,6 +1,5 @@
 pytest
 pandas
-agentql
 asyncio
 thefuzz
 playwright
