@@ -1,5 +1,4 @@
-name: build test bookie
-
+name: build n8n-bauer
 on: [workflow_dispatch]
 
 
@@ -16,8 +15,8 @@ jobs:
 
     - name: Docker Build
       run: |
-        docker build -t "${{ secrets.DOCKER_USER }}/test-bookies" .
+        docker build -t "${{ secrets.DOCKER_USER }}/n8n-bauer" .
 
     - name: Docker Push
       run: |
-        docker push "${{ secrets.DOCKER_USER }}/test-bookies"
+        docker push "${{ secrets.DOCKER_USER }}/n8n-bauer"
