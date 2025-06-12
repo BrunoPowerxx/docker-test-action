@@ -1,7 +1,9 @@
-FROM n8nio/n8n
+FROM n8nio/n8n:latest-debian
+
 WORKDIR /app
 
-RUN apk add --update python3 py3-pip
+RUN apt-get update && apt-get install -y python3 python3-pip
+
 
 # Install Python and pip using apt
 #RUN apt-get update && apt-get install -y \
