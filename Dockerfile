@@ -1,7 +1,8 @@
-FROM python:3.9-slim
+FROM n8nio/n8n
 
 WORKDIR /app
 #python -m pip install --upgrade pip
+RUN apk add --update python3 py3-pip
 COPY requirements.txt . 
 RUN pip install -r requirements.txt
 #RUN python -m pip install chrome_extension_python
@@ -28,7 +29,6 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /app/shots
 COPY . .
 
 RUN chmod +x run.sh
