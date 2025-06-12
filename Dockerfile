@@ -1,15 +1,18 @@
 FROM n8nio/n8n
 
 WORKDIR /app
-#python -m pip install --upgrade pip
-RUN apk add --update python3 py3-pip
+
+# Install Python and pip using apt
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip
+
 COPY requirements.txt . 
-RUN pip install -r requirements.txt
-#RUN python -m pip install chrome_extension_python
+RUN pip3 install -r requirements.txt
+
 RUN playwright install --with-deps
-#RUN apt install -y openvpn dialog #python3-pip python3-setuptools
-#RUN pip3 install protonvpn-cli
-# Install system dependencies
+
+# Additional system dependencies for Playwright and others
 RUN apt-get update && apt-get install -y \
     libnss3 \
     libnspr4 \
@@ -30,6 +33,3 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 COPY . .
-
-#RUN chmod +x run.sh
-#CMD ["./run.sh"]
